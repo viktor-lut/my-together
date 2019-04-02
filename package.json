@@ -1,0 +1,22 @@
+{
+  "name": "together",
+  "version": "0.1.0",
+  "description": "Together app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bogutski/together.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bogutski/together/issues"
+  },
+  "homepage": "https://github.com/bogutski/together#readme",
+  "dependencies": {
+    "express": "4.16.4"
+  }
+}
