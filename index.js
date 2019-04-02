@@ -1,7 +1,11 @@
 const express = require('express');
+const logger = require('./modules/core/logger');
 
 const PORT = 5000;
 const app = express();
+
+logger(app);
+
 
 app.get('/', (req, res) => res.send('Main example') );
 
