@@ -5,6 +5,9 @@
 Check if you have installed Node.js. Run in terminal `node -v`
 Install node https://nodejs.org/en/
 
+Check if you have installed `git`. Run in terminal `git`
+
+
 ## Installation 
 
 Clone this repo to your local machine 
