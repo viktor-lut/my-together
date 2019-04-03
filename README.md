@@ -1,12 +1,15 @@
 # Together / Coop Server
 
+**Together** - is a web-application that allows a user to create a social event and post it publicly
+to all users or within a specified group of users. Other users can join/share/comment on the event. 
+All events can be geographically filtered.
+
 ## Pre install
 
 Check if you have installed Node.js. Run in terminal `node -v`
 Install node https://nodejs.org/en/
 
 Check if you have installed `git`. Run in terminal `git`
-
 
 ## Installation 
 
