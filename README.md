@@ -1,5 +1,10 @@
 # Together / Coop Server
 
+## Pre install
+
+Check if you have installed Node.js. Run in terminal `node -v`
+Install node https://nodejs.org/en/
+
 ## Installation 
 
 Clone this repo to your local machine 
