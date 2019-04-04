@@ -25,6 +25,10 @@ Nodemon allows start server once and it will restart automatically on code chang
 ## Start 
 Run in terminal `npm run dev`
 
+## Env
+https://coop-server.herokuapp.com/
+
+
 ## Modules
 
 #### Express 

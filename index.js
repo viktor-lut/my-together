@@ -9,6 +9,7 @@ const app = express();
 
 logger(app);
 routes(app);
+ignoreFavicon(app);
 errorHandling(app);
 
 app.listen(PORT, () => {
