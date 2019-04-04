@@ -10,6 +10,7 @@ Check if you have installed Node.js. Run in terminal `node -v`
 Install node https://nodejs.org/en/
 
 Check if you have installed `git`. Run in terminal `git`
+Install git https://git-scm.com/downloads
 
 ## Installation 
 
@@ -24,6 +25,7 @@ Nodemon allows start server once and it will restart automatically on code chang
 
 ## Start 
 Run in terminal `npm run dev`
+If you don't have permission to install `nodemon`, run in terminal `npm start`
 
 ## Env
 https://coop-server.herokuapp.com/
@@ -38,3 +40,6 @@ Web framework for node.js.
 Path: `/modules/core/logger.js`.
 Allows to see in console logs like `POST /info 200 3.405 ms - 23`.
 
+### Features: 
+* Add a rating of events, communities of interests. Show the most popular topics of meetings according to their area.
+* Let person who creates the event makes it public or private for specific group of people.
