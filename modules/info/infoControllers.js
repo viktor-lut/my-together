@@ -1,7 +1,9 @@
+const message = require('./../core/message');
+
 const info = (req, res) => {
   const now = new Date();
 
-  const message = {
+  const answer = {
     timestamp: now.getTime(),
     localeString: now.toLocaleString(),
     getTimezoneOffset: now.getTimezoneOffset(),
@@ -9,7 +11,7 @@ const info = (req, res) => {
     name: 'Together app v0.1.0',
   };
 
-  res.status(200).json(message);
+  res.status(200).json(message.success(answer));
 };
 
 module.exports = info;
