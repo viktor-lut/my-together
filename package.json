@@ -8,7 +8,7 @@
     "npm": "6.4.1"
   },
   "scripts": {
-    "dev": "nodemon --inspect index.js",
+    "dev": "nodemon -r dotenv/config --inspect index.js ",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,9 +23,15 @@
   },
   "homepage": "https://github.com/bogutski/together#readme",
   "dependencies": {
+    "bcryptjs": "2.4.3",
+    "body-parser": "1.18.3",
     "express": "4.16.4",
     "mongoose": "^5.4.22",
     "morgan": "1.9.1",
     "nodemon": "^1.18.10"
+  },
+  "devDependencies": {
+    "dotenv": "7.0.0",
+    "eslint": "5.16.0"
   }
 }

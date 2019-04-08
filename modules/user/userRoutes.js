@@ -14,7 +14,7 @@ router.patch('/:userId', userUpdateById);
 
 router.delete('/:userId', userDeleteById);
 
-router.post('/', userRegister);
+router.post('/register', userRegister);
 
 router.post('/login', userLogin);
 
