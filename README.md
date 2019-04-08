@@ -40,7 +40,7 @@ To start the server, you can run one of the scripts in terminal:
 *`npm start`(the server will start running but no changes will be applied to the running instance of the application.
  You will have to stop and restart the server manually to reflect the changes. This script will run in  production.)
 
-*`nmp run dev` (the server will start running and will restart automatically if any changes to the sourcecode are made).
+*`npm run dev` (the server will start running and will restart automatically if any changes to the sourcecode are made).
 
 For more info, watch: https://youtu.be/q8YzwAbrVSY
 
