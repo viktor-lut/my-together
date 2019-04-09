@@ -1,6 +1,6 @@
-const  mongoose= require('mongoose');
+const mongoose = require('mongoose');
 const message = require('../../core/message');
-const User =  require('./../userModel');
+const User = require('./../userModel');
 const bcrypt = require('bcryptjs');
 
 const userRegister = async (req, res) => {
