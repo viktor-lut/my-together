@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0927b14e-3494-4d95-9d7e-3f6e3582bc2b",
+		"_postman_id": "73f39419-def2-45f6-92f8-6f52d9d8f844",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,11 +18,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:5000/user",
+							"raw": "{{host}}/user",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "5000",
 							"path": [
 								"user"
 							]
