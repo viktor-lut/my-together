@@ -1,8 +1,8 @@
 # Together / Coop Server
 
 **Together** - is a web-application that allows a user to create a social event and post it publicly
-to all users or within a specified group of users. Other users can join/share/comment on the event. 
-All events can be geographically filtered.
+to all users or within a specified group of users. Any user can join/share/comment on the event. 
+Any event can be geographically filtered/located.
 
 ## Pre-install
 
@@ -17,8 +17,8 @@ If git is not installed, download and install it from here: https://git-scm.com/
 
 ## Installation 
 
-1. Clone this repo to your local machine. 
-There are 2 ways to clone a repo:
+1. Clone the repo on your local machine. 
+There are 2 ways to clone the repo:
 
 *through terminal. Run in terminal:
 `git clone git@github.com:bogutski/together.git`.
@@ -26,21 +26,21 @@ There are 2 ways to clone a repo:
 *through Webstorm. When opening Webstorm, choose `Check out from Version Control` 
   and enter URL: `https://github.com/bogutski/together.git`.
 
-2. Open project in Webstorm.
+2. Open a project in Webstorm.
 
-3. Open terminal in Webstorm and run `npm i` or `npm init`.
+3. Open terminal in Webstorm and run `npm i` or `npm install`.
 
 If you have not installed `nodemon`, install it by using the following terminal command: `npm install -g nodemon`.
-Nodemon allows to start server once and it will restart automatically on code change. 
+Nodemon allows to start a server once and it will restart automatically on the code change. 
 
 ## Start 
 
 To start the server, you can run one of the scripts in terminal:
 
 *`npm start`(the server will start running but no changes will be applied to the running instance of the application.
- You will have to stop and restart the server manually to reflect the changes. This script will run in  production.)
+ You will have to stop and restart the server manually to reflect the changes. This script will running in production.)
 
-*`npm run dev` (the server will start running and will restart automatically if any changes to the sourcecode are made).
+*`npm run dev` (the server will start running and will restart automatically if any changes are made to the sourcecode ).
 
 For more info, watch: https://youtu.be/q8YzwAbrVSY
 
@@ -68,5 +68,51 @@ This module allows to see in console logs like `POST /info 200 3.405 ms - 23`.
 ### Features: 
 
 * Add a rating of events, communities of interests. Show the most popular topics of meetings according to their area.
-* Let person who creates the event make it public or private for specific group of people.
+* Let the person who creates an event make it public or private for a specific group of people.
 
+* Testing 'Register':
+    - Examples of positive automated test scripts to test 'Register'(make sure you have valid input in 'Body' 
+    on the request panel located on top of the request field):
+    ```
+             /*1.To check if we get the response, run the following test script that 
+                 confirms it is a 'success': */ 
+                         
+                         pm.test("Response is success", function () { 
+                             let jsonData = pm.response.json();
+                             pm.expect(jsonData.success).to.equal(true)  	       
+                         });  	            
+                         	            
+              /*2.To check if we get a correct returning message when a user has been registered, run the following script:
+              
+              pm.test("Correct response message", function () {  
+                  let jsonData = pm.response.json();
+                  pm.expect(jsonData.message).to.equal("User was created successfully. Please check and verify your email")  	
+               });
+                  
+              /* Expected result - 'pass', expected response message - "User was created successfully. 
+              Please check and verify your email".*/
+     ```
+              
+    - Examples of negative automated test scripts to test 'Register'.
+      Enter invalid email (e.g. "itrusevich").
+     ```
+                 /* 1. To check if we get the response, run the following test script that 
+                 checks that our response message is NOT 'success'(ecpected result - 'fail': */ 
+                 
+               pm.test("Response is success", function () { 
+                  let jsonData = pm.response.json();
+                  pm.expect(jsonData.success).to.equal(true)  	       
+                });  	 
+               
+               /* 2.To check if we get a correct returning error handling message 
+               when a user has NOT been registered, run the following script: */ 
+               
+               pm.test("Correct Error message", function () {  
+                   let jsonData = pm.response.json();
+                   pm.expect(jsonData.message).to.equal("User was not created")  	
+                   });
+               
+               // Expected result - 'pass', expected response message - "User was not created". 
+     ```
+                           
+* Testing 'Get By Id': (to be added when functionality is deployed)
