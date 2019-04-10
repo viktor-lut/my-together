@@ -70,6 +70,34 @@ This module allows to see in console logs like `POST /info 200 3.405 ms - 23`.
 * Add a rating of events, communities of interests. Show the most popular topics of meetings according to their area.
 * Let the person who creates an event make it public or private for a specific group of people.
 
+### API Testing With Postman Sample Instructions:
+1. Open the Postman.
+2. Create and name the new workspace (first time only). Change type of your workspace to 'personal'.
+3. In the left top corner, choose 'Import' and import 3 JSON files that are located in together/docs/postman folder of the project.
+4. In the right top corner, change 'No Environment' to 'Remote' environment. 
+
+* Testing 'Get All':
+  - now, if you send the request, you should see a list of users in the response body;
+  - examples of automated test scripts to test 'Get All':
+  ```
+         /*1.To check if we get the response, run the following test script that 
+            checks that our response message is 'success': */ 
+            
+            pm.test("Response is success", function () { 
+                let jsonData = pm.response.json();
+                pm.expect(jsonData.success).to.equal(true)  	       
+            });  	            
+            	            
+          /*2.To check if there is at least one user registered in database, 
+             run the following test script that checks if our array of users is greater than 0: */
+           
+            pm.test("Payload is not empty", function () {  
+                let jsonData = pm.response.json();
+                pm.expect(jsonData.payload).to.have.lengthOf.above(0)
+                pm.response.to.have.status(200)
+            }); 
+   ```
+   
 * Testing 'Register':
     - Examples of positive automated test scripts to test 'Register'(make sure you have valid input in 'Body' 
     on the request panel located on top of the request field):
