@@ -49,6 +49,13 @@ If you don't have permission to install `nodemon`, run `npm start`.
 ## Env
 https://coop-server.herokuapp.com/
 
+## Videos
+1. https://youtu.be/q8YzwAbrVSY 'Instruction on how to install server'.
+2. https://youtu.be/1Bxp50ri8o8 'Hiroku adjustment'.
+3. https://youtu.be/0Jce4nPulGs 'Module message'.
+4. https://youtu.be/AWRHpVvq_uU 'Overall server structure using the example of PASV'.
+5. https://youtu.be/wJKULr9ZEz8 'Database connection to the app. MongoDB Atlas'
+
 ## Modules
 
 #### Express 
