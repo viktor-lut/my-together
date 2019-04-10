@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "00380316-4978-4547-a8c2-14df86388136",
+		"_postman_id": "99b8e508-c5c4-4420-a02f-89ea1d427b79",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -39,13 +39,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/user/123",
+							"raw": "{{host}}/user/5caaa03da658254933f2bb27",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"user",
-								"123"
+								"5caaa03da658254933f2bb27"
 							]
 						}
 					},
@@ -75,6 +75,152 @@
 							"path": [
 								"user",
 								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GROUP",
+			"item": [
+				{
+					"name": "Get All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": \"5cac0dd66d728800049e331a\",\n}"
+						},
+						"url": {
+							"raw": "{{host}}/group/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"group",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6c912046-f652-475a-80d5-756733e08df9",
+								"exec": [
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"groupGetById\");",
+									"pm.test(\"Status code name has string\", function () {",
+									"    pm.response.to.have.status(\"OK\");",
+									"});",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/group/5cac1b245575322c90bff2f0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"group",
+								"5cac1b245575322c90bff2f0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update By Id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Homebodies\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for house rest\",\n\t\"owner\": \"5caaa23fc3d26e00049736e1\"\n}\n"
+						},
+						"url": {
+							"raw": "{{host}}/group/5cac1b245575322c90bff2f0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"group",
+								"5cac1b245575322c90bff2f0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Travelers\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/group/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"group",
+								""
 							]
 						}
 					},
