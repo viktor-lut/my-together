@@ -14,7 +14,7 @@ const userRegister = async (req, res) => {
       .status(200)
       .json(
         message.success(
-          'User created successfully. Please check your email and verify it',
+          'User was created successfully. Please check and verify your email',
         ),
       );
   } else {
@@ -49,10 +49,10 @@ async function createUser({ email, password, phone, name }) {
   return user
     .save()
     .then(() => {
-      return message.success('User created successfully');
+      return message.success('User was created successfully');
     })
     .catch(error => {
-      if (error.code === 11000) return message.fail('User with entered email exist');
+      if (error.code === 11000) return message.fail('User with the entered email exists');
       return message.fail('Error', error);
     });
 }
