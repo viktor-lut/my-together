@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "99b8e508-c5c4-4420-a02f-89ea1d427b79",
+		"_postman_id": "a7e88e52-8e49-435c-82ed-d4d05d345ff8",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,6 +10,47 @@
 			"item": [
 				{
 					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "124c70cd-b4c0-4e5d-959a-ef62c2d1ad8e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Payload is not empty array\", function () {",
+									"    pm.expect(jsonData.payload).to.be.an('array').that.is.lengthOf.above(0);",
+									"});",
+									"",
+									"const firstElement = jsonData.payload[0];",
+									"",
+									" pm.test(\"Each Element is User\", function () {",
+									"    for(let i = 0; i < jsonData.payload.length; i++){",
+									"        pm.expect(jsonData.payload[i]).to.be.an('object');",
+									"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i]._id).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i].email).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i].password).to.be.undefined;",
+									"    }",
+									"});   ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -31,6 +72,30 @@
 				},
 				{
 					"name": "Get By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60818cf6-67b9-4213-a19a-44f2c45c8d66",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -53,6 +118,30 @@
 				},
 				{
 					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [
