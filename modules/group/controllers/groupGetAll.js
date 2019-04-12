@@ -19,7 +19,6 @@ const groupGetAll = (req, res) => {
 module.exports = groupGetAll;
 
 function filterGroups(groups, userId) {
-
   return groups.filter(el => {
     if (el.accessType === 'members')
       return (
