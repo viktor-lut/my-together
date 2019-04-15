@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a7e88e52-8e49-435c-82ed-d4d05d345ff8",
+		"_postman_id": "4cdb0e0e-69c9-4b5b-95e8-175022ede9aa",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -16,16 +16,19 @@
 							"script": {
 								"id": "124c70cd-b4c0-4e5d-959a-ef62c2d1ad8e",
 								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									" pm.test(\"Status code is 200\", function () {",
+									"        pm.response.to.have.status(200);",
+									"});",
+									"    const jsonData = pm.response.json(); ",
+									"    pm.test(\"Success is true\", function () {",
+									"        pm.expect(jsonData.success).to.eql(true);",
+									"        pm.expect(jsonData.fail).to.eql(false);",
 									"});",
 									"",
-									"const jsonData = pm.response.json();",
-									"pm.test(\"Success is true\", function () {",
-									"    pm.expect(jsonData.success).to.eql(true);",
-									"    pm.expect(jsonData.fail).to.eql(false);",
+									"    pm.test(\"Correct response message\", function () {  ",
+									"        pm.expect(jsonData.message).to.equal('User Get All')  \t",
 									"});",
-									"",
+									"                  ",
 									"pm.test(\"Message exists\", function () {",
 									"    pm.expect(jsonData.message).to.not.be.undefined;",
 									"});",
@@ -34,9 +37,7 @@
 									"    pm.expect(jsonData.payload).to.be.an('array').that.is.lengthOf.above(0);",
 									"});",
 									"",
-									"const firstElement = jsonData.payload[0];",
-									"",
-									" pm.test(\"Each Element is User\", function () {",
+									"pm.test(\"Each Element is User\", function () {",
 									"    for(let i = 0; i < jsonData.payload.length; i++){",
 									"        pm.expect(jsonData.payload[i]).to.be.an('object');",
 									"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
@@ -44,8 +45,7 @@
 									"        pm.expect(jsonData.payload[i].email).to.not.be.empty;",
 									"        pm.expect(jsonData.payload[i].password).to.be.undefined;",
 									"    }",
-									"});   ",
-									""
+									"}); "
 								],
 								"type": "text/javascript"
 							}
@@ -79,10 +79,9 @@
 								"id": "60818cf6-67b9-4213-a19a-44f2c45c8d66",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"        pm.response.to.have.status(200);",
 									"});",
-									"",
-									"const jsonData = pm.response.json();",
+									"const jsonData = pm.response.json(); ",
 									"pm.test(\"Success is true\", function () {",
 									"    pm.expect(jsonData.success).to.eql(true);",
 									"    pm.expect(jsonData.fail).to.eql(false);",
@@ -90,6 +89,16 @@
 									"",
 									"pm.test(\"Message exists\", function () {",
 									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Correct response message\", function () {  ",
+									"    pm.expect(jsonData.message).to.equal('User Get By Id')  \t",
+									"});",
+									"",
+									"pm.test(\"Payload is not empty object\", function () {",
+									"    for (let key in this.payload){",
+									"       pm.expect(this.payload.key).to.not.be.empty;     ",
+									"    }",
 									"});"
 								],
 								"type": "text/javascript"
@@ -104,13 +113,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/user/5caaa03da658254933f2bb27",
+							"raw": "{{host}}/user/5cac0f2d6d728800049e3320",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"user",
-								"5caaa03da658254933f2bb27"
+								"5cac0f2d6d728800049e3320"
 							]
 						}
 					},
@@ -125,10 +134,9 @@
 								"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
+									"        pm.response.to.have.status(200);",
 									"});",
-									"",
-									"const jsonData = pm.response.json();",
+									"const jsonData = pm.response.json(); ",
 									"pm.test(\"Success is true\", function () {",
 									"    pm.expect(jsonData.success).to.eql(true);",
 									"    pm.expect(jsonData.fail).to.eql(false);",
@@ -136,6 +144,19 @@
 									"",
 									"pm.test(\"Message exists\", function () {",
 									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Correct response message\", function () {                   ",
+									"    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t",
+									"});",
+									"pm.test(\"Response is success\", function () { ",
+									"    pm.expect(jsonData.success).to.equal(true)  \t       ",
+									"});",
+									"",
+									"//Negative test",
+									"               ",
+									"pm.test(\"Correct Error message\", function () {  ",
+									"    pm.expect(jsonData.message).to.equal(\"User was not created\")  \t",
 									"});"
 								],
 								"type": "text/javascript"
@@ -176,6 +197,51 @@
 			"item": [
 				{
 					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "77087a6d-3584-4ddb-9840-6adeadd462dd",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Correct response message\", function () {  ",
+									"    pm.expect(jsonData.message).to.equal('Groups are showed')  \t",
+									"});",
+									"",
+									"pm.test(\"Payload is not empty array\", function () {",
+									"    pm.expect(jsonData.payload).to.be.an('array').that.is.lengthOf.above(0);",
+									"});",
+									"",
+									"pm.test(\"Each Element is Group\", function () {",
+									"    for(let i = 0; i < jsonData.payload.length; i++){",
+									"        pm.expect(jsonData.payload[i]).to.be.an('object');",
+									"        pm.expect(jsonData.payload[i].description).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i].members).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i]._id).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i].owner).to.not.to.be.empty;",
+									"        pm.expect(jsonData.payload[i].createdAt).to.not.be.empty;",
+									"        pm.expect(jsonData.payload[i].updatedAt).to.not.be.empty;",
+									"    }",
+									" }); "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -214,11 +280,28 @@
 							"script": {
 								"id": "6c912046-f652-475a-80d5-756733e08df9",
 								"exec": [
-									"pm.test(\"Body matches string\", function () {",
-									"    pm.expect(pm.response.text()).to.include(\"groupGetById\");",
-									"pm.test(\"Status code name has string\", function () {",
-									"    pm.response.to.have.status(\"OK\");",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
 									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Correct response message\", function () {  ",
+									"    pm.expect(jsonData.message).to.equal('The group is found')  \t",
+									"});",
+									"",
+									"pm.test(\"Payload is not empty object\", function () {",
+									"    for (let key in this.payload){",
+									"        pm.expect(this.payload.key).to.not.be.empty;     ",
+									"    }",
 									"});"
 								],
 								"type": "text/javascript"
@@ -247,6 +330,34 @@
 				},
 				{
 					"name": "Update By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ea0e2def-7c1b-44cc-b0a1-a3677a84ce96",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Correct response message\", function () {  ",
+									"    pm.expect(jsonData.message).to.equal('Group updated')  \t",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -282,7 +393,33 @@
 							"script": {
 								"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
 								"exec": [
-									""
+									"pm.test(\"Successful CREATE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});",
+									"             ",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Correct response message\", function () {  ",
+									"    pm.expect(jsonData.message).to.equal('Group created')  \t",
+									"});",
+									"",
+									"pm.test(\"Payload is not empty object\", function () {",
+									"    for (let key in this.payload){",
+									"        pm.expect(this.payload.key).to.not.be.empty;     ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"groupId\");",
+									"});"
 								],
 								"type": "text/javascript"
 							}
