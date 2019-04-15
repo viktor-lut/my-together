@@ -1,6 +1,6 @@
-const  mongoose= require('mongoose');
+const mongoose = require('mongoose');
 const message = require('../../core/message');
-const Group = require ('../groupModel');
+const Group = require('../groupModel');
 
 const groupCreate = (req, res) => {
   const _id = new mongoose.Types.ObjectId();
