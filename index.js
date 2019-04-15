@@ -19,5 +19,6 @@ ignoreFavicon(app);
 errorHandling(app);
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
 });
