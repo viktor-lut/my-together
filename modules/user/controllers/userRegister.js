@@ -4,10 +4,16 @@ const User = require('./../userModel');
 const bcrypt = require('bcryptjs');
 
 const userRegister = async (req, res) => {
-  const { email: rawEmail, password, phone, name } = req.body;
+  const {email: rawEmail, password, phone, name} = req.body;
   const email = rawEmail.trim().toLowerCase();
 
-  const createdUser = await createUser({ email, password, phone, name });
+  const isUserExists = await checkIfUserExists(email);
+  if (isUserExists)
+    return res
+      .status(409)
+      .json(message.fail('User with this email already exists.'));
+
+  const createdUser = await createUser({email, password, phone, name});
 
   if (createdUser.success) {
     return res
@@ -22,8 +28,13 @@ const userRegister = async (req, res) => {
   }
 };
 
+async function checkIfUserExists(email) {
+  return User.findOne({email: email})
+    .then(email => !!email)
+    .catch(() => false);
+}
 
-async function createUser({ email, password, phone, name }) {
+async function createUser({email, password, phone, name}) {
   const userId = new mongoose.Types.ObjectId();
   const emailHashConfirmation = new mongoose.Types.ObjectId();
 
@@ -52,7 +63,8 @@ async function createUser({ email, password, phone, name }) {
       return message.success('User was created successfully');
     })
     .catch(error => {
-      if (error.code === 11000) return message.fail('User with the entered email exists');
+      if (error.code === 11000)
+        return message.fail('User with the entered email exists');
       return message.fail('Error', error);
     });
 }
