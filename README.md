@@ -1,5 +1,7 @@
 # Together / Coop Server
 
+[![CircleCI](https://circleci.com/gh/bogutski/together.svg?style=svg)](https://circleci.com/gh/bogutski/together)
+
 **Together** - is a web-based application that allows a user to create a social event and then post it publicly
 to all the users or within a specified group of users. Any user can join/share/comment on the event. 
 Any event can be geographically filtered/located.

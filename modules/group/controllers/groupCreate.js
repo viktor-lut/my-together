@@ -5,7 +5,7 @@ const Group = require('../groupModel');
 const groupCreate = (req, res) => {
   const _id = new mongoose.Types.ObjectId();
 
-  const { name, accessType, description, owner } = req.body;
+  const {name, accessType, description, owner} = req.body;
 
   const group = new Group({
     _id,
@@ -21,13 +21,14 @@ const groupCreate = (req, res) => {
     groupId: _id,
   };
 
-  return  group
+  return group
     .save()
     .then(() => {
       return res.status(201).json(message.success('Group created', payload));
     })
     .catch(err => {
-      if (err.code === 11000) return message.fail('Group with entered name exist');
+      if (err.code === 11000)
+        return message.fail('Group with entered name exist');
       return res.status(500).json(message.fail('Incorrect request', err));
     });
 };

@@ -39,8 +39,7 @@ const eventSchema = mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: {} },
+  {timestamps: {}},
 );
 
 module.exports = mongoose.model('Event', eventSchema);
-
