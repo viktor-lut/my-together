@@ -113,13 +113,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/user/5cac0f2d6d728800049e3320",
+							"raw": "{{host}}/user/5caaa03da658254933f2bb27",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"user",
-								"5cac0f2d6d728800049e3320"
+								"5caaa03da658254933f2bb27"
 							]
 						}
 					},
@@ -453,6 +453,142 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "EVENT",
+			"item": [
+				{
+					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "124c70cd-b4c0-4e5d-959a-ef62c2d1ad8e",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/event/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60818cf6-67b9-4213-a19a-44f2c45c8d66",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/event/5caaa03da658254933f2bb27",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"event",
+								"5caaa03da658254933f2bb27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Eating\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"5caaa03da658254933f2bb27\",\n\t\"location\": \"Sacramento\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/event/create",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"event",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8072b217-d8eb-4a25-8a6f-074f71f9f7fd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d4b33023-998f-4bc0-9173-c26f6e5c95d8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
