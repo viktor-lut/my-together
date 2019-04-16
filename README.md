@@ -358,16 +358,76 @@ This module allows to see in console logs like `POST /info 200 3.405 ms - 23`.
  
 * Negative tests 'Create' for GROUP entity (to be added).
 
-    ### Group Entity
-    **‘Group’** is an entity that is created for a group of users with similar interests. Each user can be the ‘owner’ or a ‘member’ of multiple groups.
+    ### User Entity
+    **‘User’** is an entity that is created for any user of the application.
+  
+   **Fields:**
+   * _'id'_ (required). Type: string (consists of 24 symbols which are generated automatically);
+   * _'email'_ (required, unique). Type: string that matches the ABNF production;
+   * _'name'_ (required, not unique). Type: string (two parts devided by space, accept 1-15 symbols, 1st symbol - any letter in upper case, other symbols - any letters in lower case));
+   * _'phone'_ (required, unique). Type: string (accepts 11-12 symbols, 1st symbol - '+', other symbols - digits);
+   * _'password'_ (required). Type: string;
+   * _'links'_ (not required). Type: list of strings;
+   * _'roles'_ (not required). Type: array of strings;
+
+
+    **Request types:**  
+       - **_POST Register:_**
+          Controller: userRegister;   
+          URL: {{host}}/user/register 
+          To create a new user, required fields have to be manually assigned. 
+          Required fields: email, password, phone, name; 
+          Status code 200 (OK) - successful message ‘User was created successfully. Please check and verify your email’ displayed; 
+          Status code 404 (Not found) - error message ‘User was not created’.
+         
+       - **_POST Login:_**
+          Controller: userLogin;   
+          URL: {{host}}/user/login
+          Status code 200 (OK) - successful message 'Enter login and password' displayed.
+         
+       - **_GET All:_**
+          Controller: userGetAll;   
+          URL: {{host}}/user/ 
+          Response should include all users.
+          Status code 200 (OK) - successful message ‘'User Get All'’ displayed; 
+          Status code 500 (Internal Server Error) - error message displayed.
+      
+       - **_GET by Id:_**
+          Controller: userGetById;   
+          URL: {{host}}/user/userId
+          Response should include information about the user.
+          Status code 200 (OK) - successful message ‘User Get By Id’ displayed;
+          Status code 400 (Bad request) - error message ‘No found user for provided id’;
+          Status code 500 (Internal Server Error) - error message 'Get User Error' displayed.
+      
+       - **_PATCH by Id:_**
+          Controller: userUpdateById;   
+          URL: {{host}}/user/userId 
+          To make updates, changing fields have to be reassigned. Required fields: email, password, phone, name;
+          Status code 200 (OK) - successful message ‘User updated successfully’ displayed; 
+          Status code 400 (Bad request) - error message ‘User not found’.
+          Status code 500 (Internal Server Error) - error message displayed.
+      
+       - **_DELETE by Id:_**
+          Controller: userDeleteById;
+          URL: {{host}}/user/userId 
+          To create a new user, required fields have to be manually assigned. 
+          Required fields: email, password, phone, name; 
+          Status code 200 (OK) - successful message ‘User deleted successfully’ displayed, id; 
+          Status code 400 (Bad request) - error message ‘User not found’, id.
+          Status code 500 (Internal Server Error) - error message displayed.
+*More information about user entity will be added.
+
+   ### Group Entity
+   **‘Group’** is an entity that is created for a group of users with similar interests. Each user can be the ‘owner’ or a ‘member’ of multiple groups.
     
-    **Fields:**  
-    * _'id'_ (required). Type: string (consists of 24 symbols which are generated automatically);
-    * _'name'_ (required, unique). Type: string (accepts 1-15 symbols, 1st symbol - any letter in upper case, other symbols - any letters, numbers, space));
-    * _'description'_ (not required). Type: string (describes the group interest);
-    * _'owner'_ (required). Type: string (ID of the user who created the group);
-    * _'members'_ (not required). Type: array of strings(IDs of members of the group);
-    * _'accessType'_ (required). Type: string. The field accepts two values: ‘all’ or ‘members’.
+   **Fields:**
+   * _'id'_ (required). Type: string (consists of 24 symbols which are generated automatically);
+   * _'name'_ (required, unique). Type: string (accepts 1-15 symbols, 1st symbol - any letter in upper case, other symbols - any letters, numbers, space));
+   * _'description'_ (not required). Type: string (describes the group interest);
+   * _'owner'_ (required). Type: string (ID of the user who created the group);
+   * _'members'_ (not required). Type: array of strings(IDs of members of the group);
+   * _'accessType'_ (required). Type: string. The field accepts two values: ‘all’ or ‘members’.
     
     
     **Request types:**   
