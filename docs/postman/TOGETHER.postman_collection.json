@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1a77f974-60de-4bf8-891c-54bdb39779ed",
+		"_postman_id": "3c9ea819-4042-4192-9b09-8735dcf0e09e",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -581,7 +581,33 @@
 							"script": {
 								"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
 								"exec": [
-									""
+									"pm.test(\"Successful CREATE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+									"});",
+									"             ",
+									"const jsonData = pm.response.json();",
+									"pm.test(\"Success is true\", function () {",
+									"    pm.expect(jsonData.success).to.eql(true);",
+									"    pm.expect(jsonData.fail).to.eql(false);",
+									"});",
+									"",
+									"pm.test(\"Message exists\", function () {",
+									"    pm.expect(jsonData.message).to.not.be.undefined;",
+									"});",
+									"",
+									"pm.test(\"Correct response message\", function () {  ",
+									"    pm.expect(jsonData.message).to.equal('Event created')  \t",
+									"});",
+									"",
+									"pm.test(\"Payload is not empty object\", function () {",
+									"    for (let key in this.payload){",
+									"        pm.expect(this.payload.key).to.not.be.empty;     ",
+									"    }",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include('eventId');",
+									"});"
 								],
 								"type": "text/javascript"
 							}
