@@ -201,6 +201,37 @@ This module allows to see in console logs like `POST /info 200 3.405 ms - 23`.
   ```
 * More negative tests 'Register' for USER entity (to be added).
 
+* Testing 'Delete By Id' for USER entity:             
+  - the first three examples of automated test scripts to test 'Delete By Id' are the same as the first three tests for the 'Get All' request.
+
+   - examples of positive automated test scripts to test 'Delete By Id' (make sure you have a valid input for User ID in the address bar located on the top of the request field):
+   ```
+          /*1.To check if we get a response with correct status, run the following test script that checks if the the response has status '200': */ 
+                       
+          pm.test("Status code is 200", function () {
+              pm.response.to.have.status(200);
+          });
+          
+          /*2.To check if we get a correct message when the user info has been returned, run the following script: */
+              
+          const jsonData = pm.response.json();
+          
+          pm.test("Correct response message", function () {  
+              pm.expect(jsonData.message).to.equal('User deleted successfully')  	
+          });      
+          /*Expected result - 'pass', expected response message - "User deleted successfully".*/
+
+          /*3.To check if there is a user registered in database with this ID, 
+          run the following test script that checks if our object with user's info is empty */
+
+          pm.test("Payload is empty object", function () {
+              for (let key in this.payload){
+                 pm.expect(this.payload.key).to.be.empty;     
+              }
+          });
+   ```
+* Negative tests 'Delete By Id' for USER entity (to be added).
+
 * Testing 'Get All' for GROUP entity:
   - now, if you send a request, you should see a list of groups in the response body;
   - examples of positive automated test scripts to test 'Get All':

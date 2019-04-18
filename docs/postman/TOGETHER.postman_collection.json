@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4cdb0e0e-69c9-4b5b-95e8-175022ede9aa",
+		"_postman_id": "1a77f974-60de-4bf8-891c-54bdb39779ed",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -120,6 +120,54 @@
 							"path": [
 								"user",
 								"5caaa03da658254933f2bb27"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "60818cf6-67b9-4213-a19a-44f2c45c8d66",
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});          \r",
+									"\r",
+									"pm.test(\"Correct response message\", function () {  \r",
+									"pm.expect(jsonData.message).to.equal('User deleted successfully')  \t\r",
+									"});      \r",
+									"\r",
+									"pm.test(\"Payload is empty object\", function () {\r",
+									"    for (let key in this.payload){\r",
+									"        pm.expect(this.payload.key).to.be.empty;     \r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/user/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								""
 							]
 						}
 					},
