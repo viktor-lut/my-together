@@ -414,7 +414,11 @@ This module allows to see in console logs like `POST /info 200 3.405 ms - 23`.
        - **_POST Login:_**
           Controller: userLogin;   
           URL: {{host}}/user/login
-          Status code 200 (OK) - successful message 'Enter login and password' displayed.
+          To login, required fields have to be manually assigned.
+          Required fields: email, password.
+          Status code 200 (OK) - successful message 'Auth success' displayed, token, information about user and id;
+          Status code 401 (Unauthorized) - error message ‘Auth failed’.
+          Status code 500 (Internal Server Error) - error message displayed.
          
        - **_GET All:_**
           Controller: userGetAll;   
