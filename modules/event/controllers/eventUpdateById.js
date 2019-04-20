@@ -1,7 +1,23 @@
 const message = require('../../core/message');
+const Event = require('../eventModel');
 
 const eventUpdateById = (req, res) => {
-  res.status(200).json(message.success('eventUpdateById', req.params.eventId));
+  const {eventId} = req.params;
+
+  Event.updateOne({_id: eventId}, {$set: req.body})
+    .exec()
+    .then(doc => {
+      if (doc.n) {
+        res.status(200).json(message.success('Event updated'));
+      } else {
+        res.status(400).json(message.fail('Event not found'));
+      }
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json(message.fail('Incorrect request or event id', err.message));
+    });
 };
 
 module.exports = eventUpdateById;

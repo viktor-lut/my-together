@@ -496,3 +496,21 @@ This module allows to see in console logs like `POST /info 200 3.405 ms - 23`.
        Response status code 200 (OK) - successful message ‘Group updated’ displayed;  
        Response status code 400 (Bad Request)- error message ‘Group not found’ displayed;  
        Response status code 500 (Internal Server Error) - error message ‘Incorrect request or a group id’ displayed.  
+
+### Event Entity
+   **‘Event’** is an entity that describes an activity created and maintained by an authorized user. 
+   There are three roles for users in regards to the event: 
+   * _'owner'_ - the event creator; has a full access to the event, can modify, remove the event and approve applicants; 
+   * _'member'_ - an approved applicant; can view the event details and participant list, engage in discussions, receive event updates and notifications;
+   * _'applicant'_ - an authorized user, who applied for the membership; can view basic event information such as overview, location, date and time of the event;  
+   *'applicant' will be added to the eventModel later.
+  
+   **Fields:**
+   * _'id'_ (required). Type: string (consists of 24 symbols which are generated automatically);
+   * _'name'_ (required). Type: string;
+   * _'description'_ (not required). Type: string;
+   * _'owner'_ (required). Type: string (ID of the user who created the event);
+   * _'members'_ (not required). Type: array of strings (IDs of members of the event);
+   * _'date'_ (required). Type: Date;
+   * _'location'_ (required). Type: String (more information will be added);
+   * _'active'_ (not required, by default is false). Type: boolean. 

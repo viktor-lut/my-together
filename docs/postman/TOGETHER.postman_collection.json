@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "60d56718-e400-44a8-969f-11838d77b976",
+		"_postman_id": "7e96db52-b8ce-47c6-aee2-7f4ee3df679a",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -598,6 +598,73 @@
 							"response": []
 						},
 						{
+							"name": "Update By Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+										"exec": [
+											"pm.test(\"Successful CREATE request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});",
+											"             ",
+											"const jsonData = pm.response.json();",
+											"pm.test(\"Success is true\", function () {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"    pm.expect(jsonData.fail).to.eql(false);",
+											"});",
+											"",
+											"pm.test(\"Message exists\", function () {",
+											"    pm.expect(jsonData.message).to.not.be.undefined;",
+											"});",
+											"",
+											"pm.test(\"Correct response message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal('Event created')  \t",
+											"});",
+											"",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include('eventId');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Hiking\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/event/5cb6aa252fb9480004d0f77f",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"event",
+										"5cb6aa252fb9480004d0f77f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get All",
 							"event": [
 								{
@@ -632,6 +699,40 @@
 							"response": []
 						},
 						{
+							"name": "Get By Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "124c70cd-b4c0-4e5d-959a-ef62c2d1ad8e",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/event/5cb0bc417dd8f697d84bc52d",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"event",
+										"5cb0bc417dd8f697d84bc52d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Delete By Id",
 							"event": [
 								{
@@ -653,13 +754,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/event/5caaa03da658254933f2bb27",
+									"raw": "{{host}}/event/5cb0bc637dd8f697d84bc52e",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"event",
-										"5caaa03da658254933f2bb27"
+										"5cb0bc637dd8f697d84bc52e"
 									]
 								}
 							},
