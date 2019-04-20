@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b2d83932-f686-4036-86be-832f0f07c81b",
+		"_postman_id": "60d56718-e400-44a8-969f-11838d77b976",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -670,7 +670,359 @@
 				},
 				{
 					"name": "Negative",
-					"item": [],
+					"item": [
+						{
+							"name": "Create name field is empty",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"             ",
+											"const jsonData = pm.response.json();",
+											"pm.test(\"Success is true\", function () {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"    pm.expect(jsonData.fail).to.eql(true);",
+											"});",
+											"",
+											"pm.test(\"Message exists\", function () {",
+											"    pm.expect(jsonData.message).to.not.be.undefined;",
+											"});",
+											"",
+											"pm.test(\"Correct response message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal('Event create error')  \t",
+											"});",
+											"",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include('Event validation failed: name: Path `name` is required.');",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 5000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"5caaa03da658254933f2bb27\",\n\t\"location\": \"Sacramento\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/event/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"event",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create owner field is empty",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"             ",
+											"const jsonData = pm.response.json();",
+											"pm.test(\"Success is true\", function () {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"    pm.expect(jsonData.fail).to.eql(true);",
+											"});",
+											"",
+											"pm.test(\"Message exists\", function () {",
+											"    pm.expect(jsonData.message).to.not.be.undefined;",
+											"});",
+											"",
+											"pm.test(\"Correct response message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal('Event create error')  \t",
+											"});",
+											"",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include('Event validation failed');",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 5000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Eating\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"\",\n\t\"location\": \"Sacramento\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/event/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"event",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create owner id is changed",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"             ",
+											"const jsonData = pm.response.json();",
+											"pm.test(\"Success is true\", function () {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"    pm.expect(jsonData.fail).to.eql(true);",
+											"});",
+											"",
+											"pm.test(\"Message exists\", function () {",
+											"    pm.expect(jsonData.message).to.not.be.undefined;",
+											"});",
+											"",
+											"pm.test(\"Correct response message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal('Event create error')  \t",
+											"});",
+											"",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include('Event validation failed');",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 5000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Eating\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"5caaa03da658254933f2bb\",\n\t\"location\": \"Sacramento\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/event/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"event",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create location field is empty",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+										"exec": [
+											"pm.test(\"Status code is 500\", function () {",
+											"    pm.response.to.have.status(500);",
+											"});",
+											"             ",
+											"const jsonData = pm.response.json();",
+											"pm.test(\"Success is true\", function () {",
+											"    pm.expect(jsonData.success).to.eql(false);",
+											"    pm.expect(jsonData.fail).to.eql(true);",
+											"});",
+											"",
+											"pm.test(\"Message exists\", function () {",
+											"    pm.expect(jsonData.message).to.not.be.undefined;",
+											"});",
+											"",
+											"pm.test(\"Correct response message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal('Event create error')  \t",
+											"});",
+											"",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include('Event validation failed: location: Path `location` is required.');",
+											"});",
+											"",
+											"pm.test(\"Response time is less than 5000ms\", function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Eating\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"5caaa03da658254933f2bb27\",\n\t\"location\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/event/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"event",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create good",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+										"exec": [
+											"pm.test(\"Successful CREATE request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});",
+											"             ",
+											"const jsonData = pm.response.json();",
+											"pm.test(\"Success is true\", function () {",
+											"    pm.expect(jsonData.success).to.eql(true);",
+											"    pm.expect(jsonData.fail).to.eql(false);",
+											"});",
+											"",
+											"pm.test(\"Message exists\", function () {",
+											"    pm.expect(jsonData.message).to.not.be.undefined;",
+											"});",
+											"",
+											"pm.test(\"Correct response message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal('Event created')  \t",
+											"});",
+											"",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include('eventId');",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"name\": \"Eating\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"5caaa03da658254933f2bb27\",\n\t\"location\": \"Sacramento\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/event/create",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"event",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					],
 					"_postman_isSubFolder": true
 				}
 			]
