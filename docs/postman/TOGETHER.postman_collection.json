@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7e96db52-b8ce-47c6-aee2-7f4ee3df679a",
+		"_postman_id": "c03b1a2a-a3f1-46f3-8895-251db05002b0",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -37,12 +37,6 @@
 											"});",
 											"pm.test(\"Response is success\", function () { ",
 											"    pm.expect(jsonData.success).to.equal(true)  \t       ",
-											"});",
-											"",
-											"//Negative test",
-											"               ",
-											"pm.test(\"Correct Error message\", function () {  ",
-											"    pm.expect(jsonData.message).to.equal(\"User was not created\")  \t",
 											"});"
 										],
 										"type": "text/javascript"
@@ -61,7 +55,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\": \"abc@gmail.com\",\n\t\"password\": \"abc123\",\n\t\"phone\": \"+17075901867\",\n\t\"name\": \"John Doe\"\n}"
+									"raw": "{\n\t\"email\": \"abfgc@gmail.com\",\n\t\"password\": \"abc123\",\n\t\"phone\": \"+17075901867\",\n\t\"name\": \"John Doe\"\n}"
 								},
 								"url": {
 									"raw": "{{host}}/user/register",
@@ -105,13 +99,22 @@
 											"    pm.expect(jsonData.payload).to.be.an('array').that.is.lengthOf.above(0);",
 											"});",
 											"",
-											"pm.test(\"Each Element is User\", function () {",
-											"    for(let i = 0; i < jsonData.payload.length; i++){",
+											" pm.test(\"Each Element is User\", function () {",
+											"        for(let i = 0; i < jsonData.payload.length; i++){",
 											"        pm.expect(jsonData.payload[i]).to.be.an('object');",
-											"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].password).to.be.undefined;",
+											"        pm.expect(jsonData.payload[i].emailConfirmation.confirmed).to.be.a('boolean');",
+											"        pm.expect(jsonData.payload[i].phoneConfirmation.confirmed).to.be.a('boolean');",
+											"        pm.expect(jsonData.payload[i].resetPassword.history).to.be.an('array');",
+											"        pm.expect(jsonData.payload[i].roles).to.be.an('array');",
+											"        pm.expect(jsonData.payload[i].active).to.be.a('boolean');",
 											"        pm.expect(jsonData.payload[i]._id).to.not.be.empty;",
 											"        pm.expect(jsonData.payload[i].email).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].password).to.be.undefined;",
+											"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].phone).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].createdAt).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].updatedAt).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].__v).to.equal(0) ;",
 											"    }",
 											"}); "
 										],
@@ -164,10 +167,23 @@
 											"});",
 											"",
 											"pm.test(\"Payload is not empty object\", function () {",
-											"    for (let key in this.payload){",
-											"       pm.expect(this.payload.key).to.not.be.empty;     ",
+											"        for(let i = 0; i < jsonData.payload.length; i++){",
+											"        pm.expect(jsonData.payload[i]).to.be.an('object');",
+											"        pm.expect(jsonData.payload[i].password).to.be.undefined;",
+											"        pm.expect(jsonData.payload[i].emailConfirmation.confirmed).to.be.a('boolean');",
+											"        pm.expect(jsonData.payload[i].phoneConfirmation.confirmed).to.be.a('boolean');",
+											"        pm.expect(jsonData.payload[i].resetPassword.history).to.be.an('array');",
+											"        pm.expect(jsonData.payload[i].roles).to.be.an('array');",
+											"        pm.expect(jsonData.payload[i].active).to.be.a('boolean');",
+											"        pm.expect(jsonData.payload[i]._id).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].email).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].phone).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].createdAt).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].updatedAt).to.not.be.empty;",
+											"        pm.expect(jsonData.payload[i].__v).to.equal(0) ;",
 											"    }",
-											"});"
+											"}); "
 										],
 										"type": "text/javascript"
 									}
@@ -181,13 +197,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/user/5caaa03da658254933f2bb27",
+									"raw": "{{host}}/user/5cac105e0d004247601dc772",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"user",
-										"5caaa03da658254933f2bb27"
+										"5cac105e0d004247601dc772"
 									]
 								}
 							},
@@ -215,6 +231,11 @@
 											"    for (let key in this.payload){\r",
 											"        pm.expect(this.payload.key).to.be.empty;     \r",
 											"    }\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Success is true\", function () {\r",
+											"        pm.expect(jsonData.success).to.eql(true);\r",
+											"        pm.expect(jsonData.fail).to.eql(false);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -229,13 +250,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/user/",
+									"raw": "{{host}}/user/5cac10496d728800049e3326",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"user",
-										""
+										"5cac10496d728800049e3326"
 									]
 								}
 							},
@@ -246,7 +267,37 @@
 				},
 				{
 					"name": "Negative",
-					"item": [],
+					"item": [
+						{
+							"name": "Register error (gerenal)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "db0ae8c6-c942-41fb-810d-208cca9ce41e",
+										"exec": [
+											"pm.test(\"Correct Error message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal(\"User was not created\")  \t",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					],
 					"_postman_isSubFolder": true
 				}
 			]
