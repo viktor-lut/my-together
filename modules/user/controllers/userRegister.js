@@ -4,27 +4,29 @@ const User = require('./../userModel');
 const bcrypt = require('bcryptjs');
 
 const userRegister = async (req, res) => {
-  const {email: rawEmail, password, phone, name} = req.body;
+  const {email: rawEmail = '', password, phone, name} = req.body;
   const email = rawEmail.trim().toLowerCase();
 
   const isUserExists = await checkIfUserExists(email);
   if (isUserExists)
     return res
       .status(409)
-      .json(message.fail('User with this email already exists.'));
+      .json(message.fail('User with this email already exists', email));
 
   const createdUser = await createUser({email, password, phone, name});
 
   if (createdUser.success) {
     return res
-      .status(200)
+      .status(201)
       .json(
         message.success(
           'User was created successfully. Please check and verify your email',
         ),
       );
   } else {
-    return res.status(404).json(message.fail('User was not created'));
+    return res
+      .status(404)
+      .json(message.fail('User was not created', createdUser.message));
   }
 };
 
@@ -63,9 +65,7 @@ async function createUser({email, password, phone, name}) {
       return message.success('User was created successfully');
     })
     .catch(error => {
-      if (error.code === 11000)
-        return message.fail('User with the entered email exists');
-      return message.fail('Error', error);
+      return message.fail('User was not created', error.message);
     });
 }
 
