@@ -15,7 +15,6 @@ const groupCreate = (req, res) => {
     owner,
     members: [owner],
   });
-
   // Send back group id for redirect to new group after creating
   const payload = {
     groupId: _id,
@@ -24,12 +23,14 @@ const groupCreate = (req, res) => {
   return group
     .save()
     .then(() => {
-      return res.status(201).json(message.success('Group created', payload));
+      return res
+        .status(201)
+        .json(message.success('Group created', payload.groupId));
     })
     .catch(err => {
-      if (err.code === 11000)
-        return message.fail('Group with entered name exist');
-      return res.status(500).json(message.fail('Incorrect request', err));
+      return res
+        .status(500)
+        .json(message.fail('Group was not created.', err.message));
     });
 };
 

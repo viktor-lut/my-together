@@ -1,13 +1,14 @@
-const  mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const groupSchema = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId,
     name: {
       type: String,
-      required: true,
+      required: [true, 'No name'],
       unique: true,
-      match: /^[A-Z][A-Za-z0-9\s]{1,15}$/,
+      match: [/^[A-Z]{1}[A-Za-z0-9\s]{0,14}$/, 'Incorrect name format'],
     },
     description: {
       type: String,
@@ -17,7 +18,7 @@ const groupSchema = mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: [true, 'No owner'],
     },
     members: [
       {
@@ -28,11 +29,13 @@ const groupSchema = mongoose.Schema(
     ],
     accessType: {
       type: String,
-      required: true,
+      required: [true, 'No access type'],
       enum: ['members', 'all'],
     },
   },
-  { timestamps: {} },
+  {timestamps: {}},
 );
+
+groupSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Group', groupSchema);
