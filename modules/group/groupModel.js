@@ -8,7 +8,7 @@ const groupSchema = mongoose.Schema(
       type: String,
       required: [true, 'No name'],
       unique: true,
-      match: [/^[A-Z]{1}[A-Za-z0-9\s]{0,14}$/, 'Incorrect name format'],
+      match: [/^[A-Z]{1}[\w\s\W]{0,253}[^\s]{1}$/, 'Incorrect name format'],
     },
     description: {
       type: String,
