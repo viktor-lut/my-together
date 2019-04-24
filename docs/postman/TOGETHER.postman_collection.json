@@ -19,8 +19,8 @@
 									"script": {
 										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
 										"exec": [
-											"pm.test(\"Status code is 201\", function () {",
-											"        pm.response.to.have.status(201);",
+											"pm.test(\"Status code is 200\", function () {",
+											"        pm.response.to.have.status(200);",
 											"});",
 											"const jsonData = pm.response.json(); ",
 											"pm.test(\"Success is true\", function () {",
@@ -55,7 +55,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"email\": \"zdrty@gmail.com\",\n\t\"password\": \"abc123\",\n\t\"phone\": \"+17075901867\",\n\t\"name\": \"John Doe\"\n}"
+									"raw": "{\n\t\"email\": \"abfgc@gmail.com\",\n\t\"password\": \"abc123\",\n\t\"phone\": \"+17075901867\",\n\t\"name\": \"John Doe\"\n}"
 								},
 								"url": {
 									"raw": "{{host}}/user/register",
@@ -227,17 +227,15 @@
 											"pm.expect(jsonData.message).to.equal('User deleted successfully')  \t\r",
 											"});      \r",
 											"\r",
+											"pm.test(\"Payload is empty object\", function () {\r",
+											"    for (let key in this.payload){\r",
+											"        pm.expect(this.payload.key).to.be.empty;     \r",
+											"    }\r",
+											"});\r",
+											"\r",
 											"pm.test(\"Success is true\", function () {\r",
 											"        pm.expect(jsonData.success).to.eql(true);\r",
 											"        pm.expect(jsonData.fail).to.eql(false);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Body matches string\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"payload\");\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Payload exists\", function () {\r",
-											"    pm.expect(jsonData.payload).to.not.be.undefined;\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -269,7 +267,37 @@
 				},
 				{
 					"name": "Negative",
-					"item": [],
+					"item": [
+						{
+							"name": "Register error (gerenal)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "db0ae8c6-c942-41fb-810d-208cca9ce41e",
+										"exec": [
+											"pm.test(\"Correct Error message\", function () {  ",
+											"    pm.expect(jsonData.message).to.equal(\"User was not created\")  \t",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					],
 					"_postman_isSubFolder": true
 				}
 			]
@@ -306,12 +334,14 @@
 											"    pm.expect(jsonData.message).to.equal('Group created')  \t",
 											"});",
 											"",
-											"pm.test(\"Body matches string\", function () {",
-											"    pm.expect(pm.response.text()).to.include(\"payload\");",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
 											"});",
 											"",
-											"pm.test(\"Payload exists\", function () {",
-											"    pm.expect(jsonData.payload).to.not.be.undefined;",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include(\"groupId\");",
 											"});"
 										],
 										"type": "text/javascript"
@@ -330,7 +360,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"Swimmers\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for swimming\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+									"raw": "{\n\t\"name\": \"Travelers\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
 								},
 								"url": {
 									"raw": "{{host}}/group/",
@@ -378,11 +408,10 @@
 											"pm.test(\"Each Element is Group\", function () {",
 											"    for(let i = 0; i < jsonData.payload.length; i++){",
 											"        pm.expect(jsonData.payload[i]).to.be.an('object');",
-											"        pm.expect(jsonData.payload[i].description).to.not.be.undefined;",
+											"        pm.expect(jsonData.payload[i].description).to.not.be.empty;",
 											"        pm.expect(jsonData.payload[i].members).to.not.be.empty;",
 											"        pm.expect(jsonData.payload[i]._id).to.not.be.empty;",
 											"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].accessType).to.be.oneOf(['all', 'members']); ",
 											"        pm.expect(jsonData.payload[i].owner).to.not.to.be.empty;",
 											"        pm.expect(jsonData.payload[i].createdAt).to.not.be.empty;",
 											"        pm.expect(jsonData.payload[i].updatedAt).to.not.be.empty;",
@@ -446,7 +475,7 @@
 											"});",
 											"",
 											"pm.test(\"Correct response message\", function () {  ",
-											"    pm.expect(jsonData.message).to.equal('Group is found')  \t",
+											"    pm.expect(jsonData.message).to.equal('The group is found')  \t",
 											"});",
 											"",
 											"pm.test(\"Payload is not empty object\", function () {",
@@ -467,13 +496,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/group/5cbf78e98ef89600046681d2",
+									"raw": "{{host}}/group/5cac1b245575322c90bff2f0",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"group",
-										"5cbf78e98ef89600046681d2"
+										"5cac1b245575322c90bff2f0"
 									]
 								}
 							},
@@ -542,7 +571,68 @@
 				{
 					"name": "Negative",
 					"item": [
-						{
+                      {
+                        "name": "Get All by userId",
+                        "event": [
+                          {
+                            "listen": "test",
+                            "script": {
+                              "id": "57e70dfe-da24-4daf-9eec-5e0eb3cfb403",
+                              "exec": [
+                                "const jsonData = pm.response.json();",
+                                "",
+                                "pm.test(\"Request code is 500\", function () {",
+                                "  pm.expect(pm.response.code).to.eql(500);",
+                                "});",
+                                "",
+                                "pm.test(\"Request is failed\", function () {",
+                                "  pm.expect(jsonData.success).to.eql(false);",
+                                "  pm.expect(jsonData.fail).to.eql(true);",
+                                "});",
+                                "",
+                                "pm.test(\"Error message is 'Group get all error'\", function () {",
+                                "  pm.expect(jsonData.message).to.equal('Group get all error');",
+                                "});",
+                                "",
+                                "pm.test(\"Invalid field is 'userId'\", function () {",
+                                "  pm.expect(jsonData.payload.errors.name).is.exist;",
+                                "});"
+                              ],
+                              "type": "text/javascript"
+                            }
+                          }
+                        ],
+                        "protocolProfileBehavior": {
+                          "disableBodyPruning": true
+                        },
+                        "request": {
+                          "method": "GET",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "name": "Content-Type",
+                              "value": "application/json",
+                              "type": "text"
+                            }
+                          ],
+                          "body": {
+                            "mode": "raw",
+                            "raw": "{\n\t\"userId\": \"123456789\"\n}"
+                          },
+                          "url": {
+                            "raw": "{{host}}/group/",
+                            "host": [
+                              "{{host}}"
+                            ],
+                            "path": [
+                              "group",
+                              ""
+                            ]
+                          }
+                        },
+                        "response": []
+                      },
+                      {
 							"name": "Create",
 							"item": [
 								{
@@ -2577,7 +2667,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"Meeting\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"5caaa03da658254933f2bb27\",\n\t\"location\": \"Sacramento\"\n}"
+									"raw": "{\n\t\"name\": \"Eating\",\n\t\"description\": \"Eat Eat Sleep\",\n\t\"owner\": \"5caaa03da658254933f2bb27\",\n\t\"location\": \"Sacramento\"\n}"
 								},
 								"url": {
 									"raw": "{{host}}/event/create",
@@ -2600,9 +2690,9 @@
 									"script": {
 										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});    ",
+											"pm.test(\"Successful CREATE request\", function () {",
+											"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+											"});",
 											"             ",
 											"const jsonData = pm.response.json();",
 											"pm.test(\"Success is true\", function () {",
@@ -2615,9 +2705,18 @@
 											"});",
 											"",
 											"pm.test(\"Correct response message\", function () {  ",
-											"    pm.expect(jsonData.message).to.equal('Event updated')  \t",
+											"    pm.expect(jsonData.message).to.equal('Event created')  \t",
 											"});",
-											""
+											"",
+											"pm.test(\"Payload is not empty object\", function () {",
+											"    for (let key in this.payload){",
+											"        pm.expect(this.payload.key).to.not.be.empty;     ",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include('eventId');",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2658,43 +2757,7 @@
 									"script": {
 										"id": "124c70cd-b4c0-4e5d-959a-ef62c2d1ad8e",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"",
-											"const jsonData = pm.response.json();",
-											"pm.test(\"Success is true\", function () {",
-											"    pm.expect(jsonData.success).to.eql(true);",
-											"    pm.expect(jsonData.fail).to.eql(false);",
-											"});",
-											"",
-											"pm.test(\"Message exists\", function () {",
-											"    pm.expect(jsonData.message).to.not.be.undefined;",
-											"});",
-											"",
-											"pm.test(\"Correct response message\", function () {  ",
-											"    pm.expect(jsonData.message).to.equal('Events are showed')  \t",
-											"});",
-											"",
-											"pm.test(\"Payload is not empty array\", function () {",
-											"    pm.expect(jsonData.payload).to.be.an('array').that.is.lengthOf.above(0);",
-											"});",
-											"",
-											"pm.test(\"Each Element is Event\", function () {",
-											"    for(let i = 0; i < jsonData.payload.length; i++){",
-											"        pm.expect(jsonData.payload[i]).to.be.an('object');",
-											"        pm.expect(jsonData.payload[i].description).to.not.be.undefined;",
-											"        pm.expect(jsonData.payload[i].members).to.be.an('array').that.is.lengthOf.above(0);",
-											"        pm.expect(jsonData.payload[i].date).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].active).to.be.a('boolean');",
-											"        pm.expect(jsonData.payload[i]._id).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].name).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].owner).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].location).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].createdAt).to.not.be.empty;",
-											"        pm.expect(jsonData.payload[i].updatedAt).to.not.be.empty;",
-											"    }",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2728,29 +2791,7 @@
 									"script": {
 										"id": "124c70cd-b4c0-4e5d-959a-ef62c2d1ad8e",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"",
-											"const jsonData = pm.response.json();",
-											"pm.test(\"Success is true\", function () {",
-											"    pm.expect(jsonData.success).to.eql(true);",
-											"    pm.expect(jsonData.fail).to.eql(false);",
-											"});",
-											"",
-											"pm.test(\"Message exists\", function () {",
-											"    pm.expect(jsonData.message).to.not.be.undefined;",
-											"});",
-											"",
-											"pm.test(\"Correct response message\", function () {  ",
-											"    pm.expect(jsonData.message).to.equal('The event is found')  \t",
-											"});",
-											"",
-											"pm.test(\"Payload is not empty object\", function () {",
-											"    for (let key in this.payload){",
-											"        pm.expect(this.payload.key).to.not.be.empty;     ",
-											"    }",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2764,13 +2805,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/event/5cbf9cf58ef89600046681f6",
+									"raw": "{{host}}/event/5cb0bc417dd8f697d84bc52d",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"event",
-										"5cbf9cf58ef89600046681f6"
+										"5cb0bc417dd8f697d84bc52d"
 									]
 								}
 							},
@@ -2784,28 +2825,7 @@
 									"script": {
 										"id": "60818cf6-67b9-4213-a19a-44f2c45c8d66",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"}); \r",
-											"\r",
-											"const jsonData = pm.response.json();\r",
-											"\r",
-											"pm.test(\"Correct response message\", function () {  \r",
-											"pm.expect(jsonData.message).to.equal('Event deleted successfully')  \t\r",
-											"});      \r",
-											"\r",
-											"pm.test(\"Success is true\", function () {\r",
-											"        pm.expect(jsonData.success).to.eql(true);\r",
-											"        pm.expect(jsonData.fail).to.eql(false);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Body matches string\", function () {\r",
-											"    pm.expect(pm.response.text()).to.include(\"payload\");\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Payload exists\", function () {\r",
-											"    pm.expect(jsonData.payload).to.not.be.undefined;\r",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -2819,13 +2839,13 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/event/5cbf9cf58ef89600046681f6",
+									"raw": "{{host}}/event/5cb0bc637dd8f697d84bc52e",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"event",
-										"5cbf9cf58ef89600046681f6"
+										"5cb0bc637dd8f697d84bc52e"
 									]
 								}
 							},
