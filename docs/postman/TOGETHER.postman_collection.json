@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1e6bafcf-f6ef-4a67-ba97-5bf884cbfbcc",
+		"_postman_id": "f7a56c44-10a6-454a-99f5-c8702a60f00a",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -286,6 +286,21 @@
 							],
 							"request": {
 								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all",
+							"request": {
+								"method": "GET",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -771,7 +786,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/event/5cb0bc417dd8f697d84bc52d",
+									"raw": "{{host}}/event/5cbf9cf58ef89600046681f6",
 									"host": [
 										"{{host}}"
 									],
