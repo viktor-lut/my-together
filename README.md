@@ -397,7 +397,7 @@ This module allows to see in console logs like `POST /info 200 3.405 ms - 23`.
    * _'email'_ (required, unique). Type: string that matches the ABNF production;
    * _'name'_ (required, not unique). Type: string (two parts devided by space, accept 1-15 symbols, 1st symbol - any letter in upper case, other symbols - any letters in lower case));
    * _'phone'_ (required, unique). Type: string (accepts 11-12 symbols, 1st symbol - '+', other symbols - digits);
-   * _'password'_ (required). Type: string;
+   * _'password'_ (required). Type: string; (must contain at least one letter, one digit and be 6-124 characters in length, the following special characters are also allowed in the password, but not required: ~!@#$%&*_:);
    * _'links'_ (not required). Type: list of strings;
    * _'roles'_ (not required). Type: array of strings;
 
