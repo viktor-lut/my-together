@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f00c0c7a-68b4-4ecd-9550-2d0909bfb3eb",
+		"_postman_id": "5ca95fb6-c9e8-48f7-98d5-c416d95ff017",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -377,7 +377,496 @@
 						},
 						{
 							"name": "USER Negative DELETE By Id",
-							"item": [],
+							"item": [
+								{
+									"name": "Delete - Id length is 23",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \"5cbf6cee8ef896000466818\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - Id length is 25",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \"5cbf6cee8ef89600046681811\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - Id with special symbols",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \"5cbf6ce$8ef8>60004668181\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - Id with space in beginning",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \" 5cbf6cee8ef896000466818\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - Id with space in center",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \"5cbf6cee8ef8960 00466818\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - nonexistent id",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \"5cbf6cee8ef896000466818f\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 404\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User not found');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal(pm.environment.get(\"userId\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - nonexistent Id with space in end",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \"5cbf6cee8ef8960004668181  \");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 404\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User not found');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal(pm.environment.get(\"userId\").trim());\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - id with letter after \"f\"",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													"pm.environment.set(\"userId\", \"5cbf6cee8ef8960004g68181\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
 							"event": [
 								{
 									"listen": "prerequest",
