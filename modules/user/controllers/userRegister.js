@@ -29,6 +29,7 @@ const userRegister = async (req, res) => {
       .json(
         message.success(
           'User was created successfully. Please check and verify your email',
+          createdUser.payload,
         ),
       );
   } else {

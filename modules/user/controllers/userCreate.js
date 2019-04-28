@@ -34,7 +34,7 @@ async function createUser({email, password, phone, name}) {
   return user
     .save()
     .then(() => {
-      return message.success('User was created successfully');
+      return message.success('User was created successfully', userId);
     })
     .catch(error => {
       return message.fail('User was not created', error.message);
