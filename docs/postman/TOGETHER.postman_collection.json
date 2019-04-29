@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "aab95c55-0d86-46ca-b5ee-16e96f1d7946",
+		"_postman_id": "5ca95fb6-c9e8-48f7-98d5-c416d95ff017",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -2225,7 +2225,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about non unique name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Error, expected `name` to be unique. Value: `'+ pm.environment.get(\"groupName\")+'`');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Error, expected `name` to be unique. Value: `'+ pm.variables.get(\"groupName\")+'`');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -2236,7 +2236,9 @@
 											"script": {
 												"id": "de67eb12-bbc3-4917-9692-716868d586e8",
 												"exec": [
-													"pm.environment.set(\"groupName\", \"Travelers\");"
+													"pm.variables.set(\"groupName\", \"Travelers\");",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -2305,9 +2307,7 @@
 											"script": {
 												"id": "d48d1873-3e7c-42ea-a9d3-927034342237",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
-													"",
-													"pm.environment.set(\"groupName\", \"Sixteensymb\" + String(num));"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -2445,9 +2445,7 @@
 											"script": {
 												"id": "631d81ff-a94e-48b3-a57c-106b73b9d397",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000); // 5 digits",
-													"",
-													"pm.environment.set(\"groupName\", String(num) + \"digitFirst\");"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -2465,7 +2463,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"1 Group name starts with digit\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -2516,9 +2514,7 @@
 											"script": {
 												"id": "4529e8f7-1a32-46fd-bb30-0e285b67d40e",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000); // 5 digits",
-													"",
-													"pm.environment.set(\"groupName\", \"*specSym\" + String(num));"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -2536,7 +2532,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"* Group name starts with special symbol\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -2587,9 +2583,7 @@
 											"script": {
 												"id": "c54f3e02-4dcf-4d92-816a-e8ddaefa5110",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000); // 5 digits",
-													"",
-													"pm.environment.set(\"groupName\", \"ЯnonLatin\" + String(num));"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -2607,7 +2601,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"Я Group name starts with cyrillic symbol\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -2658,9 +2652,7 @@
 											"script": {
 												"id": "083d2dee-344a-4f9d-af12-86753ccda1df",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000); // 5 digits",
-													"",
-													"pm.environment.set(\"groupName\", \"lowercase\" + String(num));"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -2678,7 +2670,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"group name starts with lower case\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -2729,9 +2721,7 @@
 											"script": {
 												"id": "512c6dae-7f63-450e-a68d-d8c12ac0a2ae",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000); // 5 digits",
-													"",
-													"pm.environment.set(\"groupName\", \" Spacefirst\" + String(num));"
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -2749,7 +2739,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
+											"raw": "{\r\n\t\"name\": \" Group name starts with space\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -2800,9 +2790,9 @@
 											"script": {
 												"id": "f648db6f-93dc-4a1e-a845-ec207914a296",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (1000 - 100)) + 100); // 3 digits",
+													"pm.variables.set(\"groupName\", \"S имя группы содержит кириллицу\" + new Date().getTime());",
 													"",
-													"pm.environment.set(\"groupName\", \"SКириллица\" + String(num));"
+													"console.log(pm.variables.get(\"groupName\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -2871,9 +2861,9 @@
 											"script": {
 												"id": "cd1ddd07-d0f9-4aea-a872-20d42f7e39f0",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));"
+													"console.log(pm.variables.get(\"groupName\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -2930,7 +2920,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid owner\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.environment.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.environment.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.variables.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.variables.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
 													"});\r",
 													""
 												],
@@ -2942,10 +2932,11 @@
 											"script": {
 												"id": "eb4cad85-45b0-4819-91f0-bb5d7e73913d",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", 123456789012345678901234);",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));",
-													"pm.environment.set(\"groupOwner\", 123456789012345678901234);"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3002,7 +2993,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing owner\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: No owner');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.variables.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.variables.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
 													"});\r",
 													""
 												],
@@ -3014,9 +3005,11 @@
 											"script": {
 												"id": "9b42d545-0faa-4d7c-b35a-619bb56308f1",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", \"\");",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3034,7 +3027,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"\",\r\n\t\"accessType\": \"members\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"{{groupOwner}}\",\r\n\t\"accessType\": \"members\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -3072,9 +3065,9 @@
 													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing accessType\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: No access type');\r",
-													"});\r",
+													"/*pm.test(\"Specific error message is about missing accessType\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('');\r",
+													"});*/\r",
 													""
 												],
 												"type": "text/javascript"
@@ -3085,9 +3078,11 @@
 											"script": {
 												"id": "5ae1639b-ff2b-4b18-b60d-659d54cb29b2",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", \"5cac0d59aa8e4ed7bf85de70\");",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3105,7 +3100,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de70\",\r\n\t\"accessType\": \"members\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"{{groupOwner}}\",\r\n\t\"accessType\": \"members\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -3144,7 +3139,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid owner\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.environment.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.environment.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.variables.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.variables.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
 													"});\r",
 													""
 												],
@@ -3156,10 +3151,11 @@
 											"script": {
 												"id": "eb4cad85-45b0-4819-91f0-bb5d7e73913d",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", \"5cac0d59aa8e4ed7bf85de607\");",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));",
-													"pm.environment.set(\"groupOwner\", \"5cac0d59aa8e4ed7bf85de607\");"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3216,7 +3212,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid owner\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.environment.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.environment.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.variables.get(\"groupOwner\") + '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.variables.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3227,10 +3223,11 @@
 											"script": {
 												"id": "53868246-d7d0-4251-84b2-9637313f7519",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", \"01234567890123456789тест\");",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));",
-													"pm.environment.set(\"groupOwner\", \"01234567890123456789тест\");"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3287,7 +3284,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid owner\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.environment.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.environment.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.variables.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.variables.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3298,10 +3295,12 @@
 											"script": {
 												"id": "63aba90b-35fd-49bd-b37b-0acb40fc38f5",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", \"01234567890123456789&*]+\");",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));",
-													"pm.environment.set(\"groupOwner\", \"01234567890123456789&*]+\");"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));",
+													""
 												],
 												"type": "text/javascript"
 											}
@@ -3358,7 +3357,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid owner\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.environment.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.environment.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.variables.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.variables.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3369,10 +3368,11 @@
 											"script": {
 												"id": "cd581047-361d-4c9a-8a14-1e1d2f7350fb",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", \"12345 67890 12345 67890 \");",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));",
-													"pm.environment.set(\"groupOwner\", \"123456789012345678 space\");"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3441,9 +3441,9 @@
 											"script": {
 												"id": "3cbbd21e-af9a-410f-9598-e6fd61fdc836",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3512,9 +3512,9 @@
 											"script": {
 												"id": "5ae1639b-ff2b-4b18-b60d-659d54cb29b2",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3571,7 +3571,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid accessType\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: `'+ pm.environment.get(\"groupAccessType\") +'` is not a valid enum value for path `accessType`.');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: `'+ pm.variables.get(\"groupAccessType\") +'` is not a valid enum value for path `accessType`.');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3582,10 +3582,11 @@
 											"script": {
 												"id": "17a84f68-44ad-40b6-9fed-7d2b09bed4d7",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupAccessType\", \"random\");",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));",
-													"pm.environment.set(\"groupAccessType\", \"random\");"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupAccessType: \" + pm.variables.get(\"groupAccessType\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3603,7 +3604,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de70\",\r\n\t\"accessType\": \"random\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de70\",\r\n\t\"accessType\": \"{{groupAccessType}}\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -3642,7 +3643,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid accessType\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: `'+ pm.environment.get(\"groupAccessType\") +'` is not a valid enum value for path `accessType`.');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: `'+ pm.variables.get(\"groupAccessType\") +'` is not a valid enum value for path `accessType`.');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3653,10 +3654,11 @@
 											"script": {
 												"id": "17a84f68-44ad-40b6-9fed-7d2b09bed4d7",
 												"exec": [
-													"let num = (Math.floor(Math.random() * (100000 - 10000)) + 10000);",
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupAccessType\", 123);",
 													"",
-													"pm.environment.set(\"groupName\", \"QA3 fans\" + String(num));",
-													"pm.environment.set(\"groupAccessType\", 123);"
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupAccessType: \" + pm.variables.get(\"groupAccessType\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -5485,6 +5487,24 @@
 			"value": "",
 			"type": "string"
 		},
+        {
+            "id": "1924371e-4311-4d77-b38b-d5d91bddf474",
+            "key": "groupName",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "id": "361fdcf8-47c2-4d0e-a7fa-20f2370515e1",
+            "key": "groupOwner",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "id": "d23d85da-7d29-47cf-b3ca-2c8fa3e61439",
+            "key": "groupAccessType",
+            "value": "",
+            "type": "string"
+        },
 		{
 			"id": "135889b0-205b-4d49-8dc2-5c9ad534a5a6",
 			"key": "eventId",
