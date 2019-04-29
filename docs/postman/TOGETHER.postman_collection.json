@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4082a262-0367-4414-88f4-b15a72745db4",
+		"_postman_id": "cd49bb4f-a1e5-473c-8e7c-864fb19a1e36",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -525,7 +525,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \"5cbf6cee8ef896000466818\");"
+													"pm.variables.set(\"userID\", \"5cbf6cee8ef896000466818\");"
 												],
 												"type": "text/javascript"
 											}
@@ -550,8 +550,8 @@
 													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"pm.test(\"Specific error message is about incorrect user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userID\")+'\" at path \"_id\" for model \"User\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -566,13 +566,13 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
 										}
 									},
@@ -586,7 +586,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \"5cbf6cee8ef89600046681811\");"
+													"pm.variables.set(\"userID\", \"5cbf6cee8ef89600046681811\");"
 												],
 												"type": "text/javascript"
 											}
@@ -611,8 +611,8 @@
 													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"pm.test(\"Specific error message is about incorrect user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userID\")+'\" at path \"_id\" for model \"User\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -627,13 +627,13 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
 										}
 									},
@@ -647,7 +647,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \"5cbf6ce$8ef8>60004668181\");"
+													"pm.variables.set(\"userID\", \"5cbf6ce$8ef8>60004668181\");"
 												],
 												"type": "text/javascript"
 											}
@@ -672,8 +672,8 @@
 													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"pm.test(\"Specific error message is about incorrect user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userID\")+'\" at path \"_id\" for model \"User\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -688,13 +688,13 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
 										}
 									},
@@ -708,7 +708,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \" 5cbf6cee8ef896000466818\");"
+													"pm.variables.set(\"userID\", \" 5cbf6cee8ef896000466818\");"
 												],
 												"type": "text/javascript"
 											}
@@ -733,8 +733,8 @@
 													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"pm.test(\"Specific error message is about incorrect user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userID\")+'\" at path \"_id\" for model \"User\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -749,13 +749,13 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
 										}
 									},
@@ -769,7 +769,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \"5cbf6cee8ef8960 00466818\");"
+													"pm.variables.set(\"userID\", \"5cbf6cee8ef8960 00466818\");"
 												],
 												"type": "text/javascript"
 											}
@@ -794,8 +794,8 @@
 													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"pm.test(\"Specific error message is about incorrect user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userID\")+'\" at path \"_id\" for model \"User\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -810,13 +810,13 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
 										}
 									},
@@ -830,7 +830,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \"5cbf6cee8ef896000466818f\");"
+													"pm.variables.set(\"userID\", \"5cbf6cee8ef896000466818f\");"
 												],
 												"type": "text/javascript"
 											}
@@ -855,8 +855,8 @@
 													"    pm.expect(jsonData.message).to.equal('User not found');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal(pm.environment.get(\"userId\"));\r",
+													"pm.test(\"Specific error message is about nonexistent user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal(pm.variables.get(\"userID\"));\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -871,13 +871,13 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
 										}
 									},
@@ -891,7 +891,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \"5cbf6cee8ef8960004668181  \");"
+													"pm.variables.set(\"userID\", \"5cbf6cee8ef8960004668181  \");"
 												],
 												"type": "text/javascript"
 											}
@@ -916,8 +916,8 @@
 													"    pm.expect(jsonData.message).to.equal('User not found');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal(pm.environment.get(\"userId\").trim());\r",
+													"pm.test(\"Specific error message is about nonexistent user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal(pm.variables.get(\"userID\").trim());\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -932,15 +932,16 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
-										}
+										},
+										"description": "Spaces in the end of id should be deleted"
 									},
 									"response": []
 								},
@@ -952,7 +953,7 @@
 											"script": {
 												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
 												"exec": [
-													"pm.environment.set(\"userId\", \"5cbf6cee8ef8960004g68181\");"
+													"pm.variables.set(\"userID\", \"5cbf6cee8ef8960004g68181\");"
 												],
 												"type": "text/javascript"
 											}
@@ -977,8 +978,8 @@
 													"    pm.expect(jsonData.message).to.equal('User Delete By Id error');  \t\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.environment.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"pm.test(\"Specific error message is about incorrect user id\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userID\")+'\" at path \"_id\" for model \"User\"');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -993,15 +994,74 @@
 											"raw": ""
 										},
 										"url": {
-											"raw": "{{host}}/user/{{userId}}",
+											"raw": "{{host}}/user/{{userID}}",
 											"host": [
 												"{{host}}"
 											],
 											"path": [
 												"user",
-												"{{userId}}"
+												"{{userID}}"
 											]
+										},
+										"description": "userId can use numbers and letters a-f Upper and LowerCase."
+									},
+									"response": []
+								},
+								{
+									"name": "Delete - id length is 0",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f00c841b-0e6b-49cf-9843-8c5d44f79633",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "01a2215a-c615-436e-9f7b-4b35c3c093c1",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 404\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('API not found');  \t\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
 										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												""
+											]
+										},
+										"description": "userId can use numbers and letters a-f Upper and LowerCase."
 									},
 									"response": []
 								}
@@ -3907,11 +3967,17 @@
 		}
 	],
 	"variable": [
-		{
-			"id": "7ad11f07-ea14-4a0b-b686-54db1b1bd5f0",
-			"key": "userEmail",
-			"value": "",
-			"type": "string"
-		}
+        {
+          "id": "7ad11f07-ea14-4a0b-b686-54db1b1bd5f0",
+          "key": "userEmail",
+          "value": "",
+          "type": "string"
+        },
+        {
+          "id": "59d81161-63b7-4088-9567-6e5a14ad1c7a",
+          "key": "userID",
+          "value": "",
+          "type": "string"
+        }
 	]
 }
