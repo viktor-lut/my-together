@@ -489,7 +489,618 @@
 						},
 						{
 							"name": "USER Negative PATCH Update By Id",
-							"item": [],
+							"item": [
+								{
+									"name": "Update-empty Id",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"\");",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 404\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('API not found');  \t\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Id length is 23",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"5cbf6cee8ef896000466818\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Id length is 25",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"5cbf6cee8ef896000466818\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Id with special symbols",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"5cbf6cee8e!896000466818\");",
+													"console.log(pm.variables.get(\"UserId\"));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Id with special symbol '%'",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"5cbf6cee8e%896000466818\");",
+													"console.log(pm.variables.get(\"UserId\"));"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Id with space in beginning",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \" 5bf6cee8ef896000466818\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Id with space in a center",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \" 5bf6cee8ef 96000466818\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-nonexistent Id",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"5cbf6cee8ef896000466818f\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 404\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User not found');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal(pm.variables.get(\"userId\"));\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-nonexistent Id with space in the end",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"5cbf6cee8ef8960004668187 \");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 404\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User not found');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal(pm.variables.get(\"userId\").trim());\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update-Id with any letter different than 'a-f'",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6b3a6ede-ddcf-4fef-9d75-1e6bf60f7922",
+												"exec": [
+													"pm.variables.set(\"userId\", \"5cbf6cee8ef896000g668187\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "46d443fa-3feb-4e58-919f-b75b7332c6fc",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('User update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"userId\")+'\" at path \"_id\" for model \"User\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/user/{{userId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"{{userId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
 							"event": [
 								{
 									"listen": "prerequest",
@@ -4278,6 +4889,12 @@
         {
           "id": "59d81161-63b7-4088-9567-6e5a14ad1c7a",
           "key": "userID",
+          "value": "",
+          "type": "string"
+        },
+        {
+          "id": "ae6fe345-3809-4031-a763-de8f5554c62b",
+          "key": "userId",
           "value": "",
           "type": "string"
         },
