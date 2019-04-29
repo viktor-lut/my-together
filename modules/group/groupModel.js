@@ -6,9 +6,14 @@ const groupSchema = mongoose.Schema(
     _id: mongoose.Schema.Types.ObjectId,
     name: {
       type: String,
-      required: [true, 'No name'],
-      unique: true,
-      match: [/^[A-Z]{1}[\w\s\W]{0,253}[^\s]{1}$/, 'Incorrect name format'],
+      required: [true, 'Name is required'],
+      trim: true,
+      unique: 'Group name must be unique',
+      default: '',
+      match: [
+        /^[A-Za-z0-9\s!@#$%^&()_+=\-`~\][{}|';:/.,?><]{2,255}$/,
+        'Incorrect name format',
+      ],
     },
     description: {
       type: String,
@@ -18,7 +23,7 @@ const groupSchema = mongoose.Schema(
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, 'No owner'],
+      required: [true, 'Owner id must be specified'],
     },
     members: [
       {
@@ -29,7 +34,7 @@ const groupSchema = mongoose.Schema(
     ],
     accessType: {
       type: String,
-      required: [true, 'No access type'],
+      required: [true, 'Access type must be specified'],
       enum: ['members', 'all'],
     },
   },

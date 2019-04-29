@@ -16,16 +16,11 @@ const groupCreate = (req, res) => {
     members: [owner],
   });
   // Send back group id for redirect to new group after creating
-  const payload = {
-    groupId: _id,
-  };
 
   return group
     .save()
     .then(() => {
-      return res
-        .status(201)
-        .json(message.success('Group created', payload.groupId));
+      return res.status(201).json(message.success('Group created', _id));
     })
     .catch(err => {
       return res
