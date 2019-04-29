@@ -5,14 +5,7 @@ const Event = require('../eventModel');
 const eventCreate = (req, res) => {
   const _id = new mongoose.Types.ObjectId();
 
-  const {
-    name,
-    description = '',
-    owner,
-    date,
-    location,
-    active = false,
-  } = req.body;
+  const {name, description, owner, date, location, active = false} = req.body;
 
   const event = new Event({
     _id,
@@ -26,14 +19,11 @@ const eventCreate = (req, res) => {
   });
 
   // Send back event id for redirect to new event after creating
-  const payload = {
-    eventId: _id,
-  };
 
   return event
     .save()
     .then(() => {
-      return res.status(201).json(message.success('Event created', payload));
+      return res.status(201).json(message.success('Event created', _id));
     })
     .catch(err => {
       return res
