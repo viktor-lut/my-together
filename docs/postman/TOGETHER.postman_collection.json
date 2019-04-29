@@ -3736,7 +3736,309 @@
 						},
 						{
 							"name": "EVENT Negative GET By Id",
-							"item": [],
+							"item": [
+								{
+									"name": "Get - event ID does not exist",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "52c016dd-d3ff-4ff8-ba52-4e14a73cb537",
+												"exec": [
+													"pm.variables.set(\"eventId\", \"5cbfe88a2d075a00949a2ab5\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "66999ac7-0bd6-4c73-a0d4-595bd3ce53bd",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"             ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {",
+													"    pm.expect(jsonData.message).to.equal('No event for provided id')  \t",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get - event ID is 23 (less than possible)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "52c016dd-d3ff-4ff8-ba52-4e14a73cb537",
+												"exec": [
+													"pm.variables.set(\"eventId\", \"5cbfe88a2d075a00049a2ab\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "66999ac7-0bd6-4c73-a0d4-595bd3ce53bd",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 500\", function () {",
+													"    pm.response.to.have.status(500);",
+													"});",
+													"             ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {",
+													"    pm.expect(jsonData.message).to.equal('Incorrect event id')  \t",
+													"});",
+													"",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  ",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"eventId\")+'\" at path \"_id\" for model \"Event\"');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get - event ID is 25 (more than possible)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "52c016dd-d3ff-4ff8-ba52-4e14a73cb537",
+												"exec": [
+													"pm.variables.set(\"eventId\", \"5cbfe88a2d075a00049a2ab54\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "66999ac7-0bd6-4c73-a0d4-595bd3ce53bd",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 500\", function () {",
+													"    pm.response.to.have.status(500);",
+													"});",
+													"             ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {",
+													"    pm.expect(jsonData.message).to.equal('Incorrect event id')  \t",
+													"});",
+													"",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  ",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"eventId\")+'\" at path \"_id\" for model \"Event\"');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get - event ID with a space at the beginnig",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "52c016dd-d3ff-4ff8-ba52-4e14a73cb537",
+												"exec": [
+													"pm.variables.set(\"eventId\", \" 5cbfe88a2d075a00049a2ab5\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "66999ac7-0bd6-4c73-a0d4-595bd3ce53bd",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 500\", function () {",
+													"    pm.response.to.have.status(500);",
+													"});",
+													"             ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {",
+													"    pm.expect(jsonData.message).to.equal('Incorrect event id')  \t",
+													"});",
+													"",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  ",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"eventId\")+'\" at path \"_id\" for model \"Event\"');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get - event ID with a space at the center",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "52c016dd-d3ff-4ff8-ba52-4e14a73cb537",
+												"exec": [
+													"pm.variables.set(\"eventId\", \"5cbfe88a2 d075a00049a2ab5\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "66999ac7-0bd6-4c73-a0d4-595bd3ce53bd",
+												"exec": [
+													"const jsonData = pm.response.json();",
+													"",
+													"pm.test(\"Status code is 500\", function () {",
+													"    pm.response.to.have.status(500);",
+													"});",
+													"             ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {",
+													"    pm.expect(jsonData.message).to.equal('Incorrect event id')  \t",
+													"});",
+													"",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  ",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"eventId\")+'\" at path \"_id\" for model \"Event\"');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
 							"event": [
 								{
 									"listen": "prerequest",
@@ -3976,6 +4278,12 @@
         {
           "id": "59d81161-63b7-4088-9567-6e5a14ad1c7a",
           "key": "userID",
+          "value": "",
+          "type": "string"
+        },
+        {
+          "id": "d4e59eae-5771-4a34-8d7c-5352d8e9b4c5",
+          "key": "eventId",
           "value": "",
           "type": "string"
         }
