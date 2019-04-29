@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cd49bb4f-a1e5-473c-8e7c-864fb19a1e36",
+		"_postman_id": "aab95c55-0d86-46ca-b5ee-16e96f1d7946",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -4676,7 +4676,594 @@
 						},
 						{
 							"name": "EVENT Negative PATCH Update By Id",
-							"item": [],
+							"item": [
+								{
+									"name": "Update - 'name' length is 1 (less than limit)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 500\", function () {\r    pm.response.to.have.status(500);\r});    \r\rpm.test(\"Success is false\", function () {\r    pm.expect(jsonData.success).to.eql(false);\r    pm.expect(jsonData.fail).to.eql(true);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Incorrect request or event id')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", \"1\");",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'name' length is 251 (more than limit)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 500\", function () {\r    pm.response.to.have.status(500);\r});    \r\rpm.test(\"Success is false\", function () {\r    pm.expect(jsonData.success).to.eql(false);\r    pm.expect(jsonData.fail).to.eql(true);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Incorrect request or event id')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", 'a'.repeat(251));",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(\"eventName\");"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'name' contains cyrillic",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 500\", function () {\r    pm.response.to.have.status(500);\r});    \r\rpm.test(\"Success is false\", function () {\r    pm.expect(jsonData.success).to.eql(false);\r    pm.expect(jsonData.fail).to.eql(true);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Incorrect request or event id')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", 'абвг'+ new Date().getTime());",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'name'  is empty",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 500\", function () {\r    pm.response.to.have.status(500);\r});    \r\rpm.test(\"Success is false\", function () {\r    pm.expect(jsonData.success).to.eql(false);\r    pm.expect(jsonData.fail).to.eql(true);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Incorrect request or event id')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", '');",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'name'  is boolean",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});    \r\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Event updated')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", true);",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'name'  is object",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});    \r\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Event updated')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", {sdsa:'asds'});",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'name'  is array",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});    \r\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Event updated')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", [1,\"testing\"]);",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"New description\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'description'  is empty",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 500\", function () {\r    pm.response.to.have.status(500);\r});    \r\rpm.test(\"Success is false\", function () {\r    pm.expect(jsonData.success).to.eql(false);\r    pm.expect(jsonData.fail).to.eql(true);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Incorrect request or event id')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", \"coding\");",
+													"pm.variables.set(\"eventDescription\", \"\");",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventDescription\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"{{eventDescription}}\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'description'  is object",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});    \r\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Event updated')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", \"coding\");",
+													"pm.variables.set(\"eventDescription\", {testing: \"testing123\"});",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventDescription\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"{{eventDescription}}\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'description'  is array",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});    \r\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Event updated')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", \"coding\");",
+													"pm.variables.set(\"eventDescription\", [1,'2323']);",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventDescription\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"{{eventDescription}}\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update - 'description'  is boolean",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "d5917dc0-ae28-4851-9910-28fc070c81f2",
+												"exec": [
+													"const jsonData = pm.response.json();\r\rpm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});    \r\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Event updated')  \t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "f53383f4-c88c-4280-8ff3-50199bfa0355",
+												"exec": [
+													"pm.variables.set(\"eventName\", \"coding\");",
+													"pm.variables.set(\"eventDescription\", true);",
+													"pm.variables.set(\"eventId\", \"5cb6aa252fb9480004d0f77f\");",
+													"console.log(pm.variables.get(\"eventDescription\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{eventName}}\",\n\t\"description\": \"{{eventDescription}}\",\n\t\"location\": \"New location\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/event/{{eventId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"event",
+												"{{eventId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
 							"_postman_isSubFolder": true
 						},
 						{
@@ -4880,29 +5467,41 @@
 		}
 	],
 	"variable": [
-        {
-          "id": "7ad11f07-ea14-4a0b-b686-54db1b1bd5f0",
-          "key": "userEmail",
-          "value": "",
-          "type": "string"
-        },
-        {
-          "id": "59d81161-63b7-4088-9567-6e5a14ad1c7a",
-          "key": "userID",
-          "value": "",
-          "type": "string"
-        },
-        {
-          "id": "ae6fe345-3809-4031-a763-de8f5554c62b",
-          "key": "userId",
-          "value": "",
-          "type": "string"
-        },
-        {
-          "id": "d4e59eae-5771-4a34-8d7c-5352d8e9b4c5",
-          "key": "eventId",
-          "value": "",
-          "type": "string"
-        }
+		{
+			"id": "32b8052b-0dd8-46d9-a771-a87201d3894b",
+			"key": "userEmail",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "a56c1509-fe47-43fb-a873-7da48e220731",
+			"key": "userID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "b307cc69-7906-4d50-a63e-51f90a7f71a5",
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "135889b0-205b-4d49-8dc2-5c9ad534a5a6",
+			"key": "eventId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "7dcbd8b5-5b6c-49d7-a8a5-97c3beec6974",
+			"key": "eventName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "d8121856-f8ad-46d5-a200-510c77461593",
+			"key": "eventDescription",
+			"value": "",
+			"type": "string"
+		}
 	]
 }
