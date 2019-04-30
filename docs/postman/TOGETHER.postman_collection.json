@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5ca95fb6-c9e8-48f7-98d5-c416d95ff017",
+		"_postman_id": "6df9265c-dac0-4e96-9e32-b72f9c971e97",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -12,45 +12,649 @@
 					"name": "USER Positive",
 					"item": [
 						{
-							"name": "Register",
-							"event": [
+							"name": "USER Positive POST Register",
+							"item": [
 								{
-									"listen": "test",
-									"script": {
-										"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
-										"exec": [
-											"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\rpm.test(\"Response is success\", function () { \r    pm.expect(jsonData.success).to.equal(true)  \t       \r});\r"
+									"name": "Register - password length is 6",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,11));",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
 										],
-										"type": "text/javascript"
-									}
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"John Doe\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - password length is 124",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "267bbe12-873f-443b-96a0-7e49e8490ea8",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPassword\", \"A\".repeat(123) + '7');",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,11));",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"{{userPassword}}\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"John Doe\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - password contains special symbols (~!@#$%&*_:)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "02fe795f-dd2e-4e6c-b22a-c0c3ec8edc36",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,11));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"~!@#$%&*_:G0\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"John Doe\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - password contains digitals (0-9) and one letter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "02fe795f-dd2e-4e6c-b22a-c0c3ec8edc36",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,11));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"0123456789h\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"John Doe\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - password contains letters (a-z, A-Z) and one digital",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "02fe795f-dd2e-4e6c-b22a-c0c3ec8edc36",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,11));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ9\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"John Doe\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - phone length is 12",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,11));",
+													"console.log(pm.variables.get(\"userPhone\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"John Doe\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - phone length is 13",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,12));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"John Doe\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - name consists of 2 words (15 length each)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,12));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"Ihjklogiuythjklk Jhjkloiuythjklo\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - name consists of 2 words (1 length each)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@gmail.com\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,12));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"Y O\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - email ends on \"@mail.ru\"",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@mail.ru\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,12));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"You Oou\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - email ends on \"@my.company.eu\"",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"Ahjhj\" + new Date().getTime() + \"@my.company.eu\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,12));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"You Oou\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register - email comtains letters (a-z, A-Z) and digitals (0-9)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "0acb4ed3-ee39-411a-a1c9-4c592372a003",
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {\r        pm.response.to.have.status(201);\r});\r\rconst jsonData = pm.response.json(); \rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {                   \r    pm.expect(jsonData.message).to.equal('User was created successfully. Please check and verify your email')  \t\r});\r\rpm.test(\"Payload is string and has the length 24\", function () {                   \r    pm.expect(jsonData.payload).to.be.a('string').to.have.lengthOf(24)\t\r});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "1ff2f73c-9c43-4bf1-b298-b7572bfe8397",
+												"exec": [
+													"pm.variables.set(\"userEmail\", \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\" + new Date().getTime() + \"@mycompany.eu\");",
+													"pm.variables.set(\"userPhone\", \"+\" + new Date().getTime().toString().substring(0,12));",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\": \"{{userEmail}}\",\n\t\"password\": \"1234Aa\",\n\t\"phone\": \"{{userPhone}}\",\n\t\"name\": \"You Oou\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
 								}
 							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"email\": \"abfgc05@gmail.com\",\n\t\"password\": \"abc123\",\n\t\"phone\": \"+17075901867\",\n\t\"name\": \"John Doe\"\n}"
-								},
-								"url": {
-									"raw": "{{host}}/user/register",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"user",
-										"register"
-									]
-								}
-							},
-							"response": []
+							"_postman_isSubFolder": true
 						},
 						{
 							"name": "Login",
@@ -5470,56 +6074,74 @@
 	],
 	"variable": [
 		{
-			"id": "32b8052b-0dd8-46d9-a771-a87201d3894b",
+			"id": "8f111255-b578-4c36-a3bd-4c0932f72f19",
 			"key": "userEmail",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "a56c1509-fe47-43fb-a873-7da48e220731",
+			"id": "3fe257f2-a3b7-46de-9262-c330120e3b10",
 			"key": "userID",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "b307cc69-7906-4d50-a63e-51f90a7f71a5",
+			"id": "ac8c9860-9f9b-44d6-8c6c-88308844be36",
 			"key": "userId",
 			"value": "",
 			"type": "string"
 		},
-        {
-            "id": "1924371e-4311-4d77-b38b-d5d91bddf474",
-            "key": "groupName",
-            "value": "",
-            "type": "string"
-        },
-        {
-            "id": "361fdcf8-47c2-4d0e-a7fa-20f2370515e1",
-            "key": "groupOwner",
-            "value": "",
-            "type": "string"
-        },
-        {
-            "id": "d23d85da-7d29-47cf-b3ca-2c8fa3e61439",
-            "key": "groupAccessType",
-            "value": "",
-            "type": "string"
-        },
 		{
-			"id": "135889b0-205b-4d49-8dc2-5c9ad534a5a6",
+			"id": "b06e9aa3-6f44-4f06-8a51-fe146e4941dd",
+			"key": "groupName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "a32ec33a-e50b-481d-b8a5-c8189f152488",
+			"key": "groupOwner",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "6009c8f5-ff55-4ed3-8ef0-6946cd08f78e",
+			"key": "groupAccessType",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "1ff7f3c6-4e90-4737-8afa-06d776560081",
 			"key": "eventId",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "7dcbd8b5-5b6c-49d7-a8a5-97c3beec6974",
+			"id": "e7d0cedd-552b-4b36-b2dd-029ddc6a46f5",
 			"key": "eventName",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "d8121856-f8ad-46d5-a200-510c77461593",
+			"id": "24a76786-25c6-4e12-aff9-a3dbe9274710",
 			"key": "eventDescription",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "e57b89c9-df55-4f14-8cff-bb1c719fead2",
+			"key": "userPassword",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "540a5300-5992-4315-9ce2-6d2b8fa86f8d",
+			"key": "userPhone",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "6bd842c2-9554-4c71-a057-58486b8b9a8b",
+			"key": "userName",
 			"value": "",
 			"type": "string"
 		}
