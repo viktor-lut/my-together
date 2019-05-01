@@ -11,11 +11,11 @@ const groupGetById = (req, res) => {
       if (doc) {
         res.status(200).json(message.success('Group is found', doc));
       } else {
-        res.status(404).json(message.fail('Group not found.', groupId));
+        res.status(404).json(message.fail('Group not found', groupId));
       }
     })
     .catch(err => {
-      res.status(500).json(message.fail('Group cannot be found.', err.message));
+      res.status(500).json(message.fail('Group Get By Id error', err.message));
     });
 };
 
