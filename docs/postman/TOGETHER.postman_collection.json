@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e0623b9d-7115-4989-8857-dc2209c06040",
+		"_postman_id": "d8b0c18d-2584-458f-bbad-8262e4782013",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -2961,7 +2961,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: No name, accessType: No access type, owner: No owner');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: Access type must be specified, owner: Owner id must be specified, name: Name is required');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3019,7 +3019,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: No name, accessType: No access type, owner: No owner');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: Access type must be specified, owner: Owner id must be specified, name: Name is required');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3077,7 +3077,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing 'name'\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: No name');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Name is required');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3121,22 +3121,35 @@
 												"exec": [
 													"const jsonData = pm.response.json();\r",
 													"\r",
-													"pm.test(\"Request code is 500\", function () {\r",
-													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"pm.test(\"Request code is 201\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(201);\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Request is failed\", function () {\r",
-													"    pm.expect(jsonData.success).to.eql(false);\r",
-													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"    pm.expect(jsonData.success).to.eql(true);\r",
+													"    pm.expect(jsonData.fail).to.eql(false);\r",
 													"});\r",
 													"\r",
-													"pm.test(\"Prime error message is correct\", function () {  \r",
-													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
+													"pm.test(\"Response message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group created');  \t\r",
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about invalid name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Incorrect name format');\r",
+													"    pm.expect(jsonData.payload).is.not.undefined;\r",
+													"    pm.expect(jsonData.payload.length).is.eql(24);\r",
 													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "6cdd469e-9e47-4ac5-9012-213524f50ee4",
+												"exec": [
+													"pm.variables.set(\"groupName\", new Date().getTime());",
+													"",
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));"
 												],
 												"type": "text/javascript"
 											}
@@ -3154,7 +3167,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"name\": 123,\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de70\",\r\n\t\"accessType\": \"all\"\r\n}"
+											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de70\",\r\n\t\"accessType\": \"all\"\r\n}"
 										},
 										"url": {
 											"raw": "{{host}}/group/",
@@ -3193,7 +3206,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing 'name'\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: No name');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Name is required');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3228,7 +3241,7 @@
 									"response": []
 								},
 								{
-									"name": "Create - 'name' is not unique",
+									"name": "Create - 'name' with spaces at edges (not unique)",
 									"event": [
 										{
 											"listen": "test",
@@ -3251,7 +3264,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about non unique name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Error, expected `name` to be unique. Value: `'+ pm.variables.get(\"groupName\")+'`');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Group name must be unique');\r",
 													"});"
 												],
 												"type": "text/javascript"
@@ -3262,7 +3275,7 @@
 											"script": {
 												"id": "de67eb12-bbc3-4917-9692-716868d586e8",
 												"exec": [
-													"pm.variables.set(\"groupName\", \"Travelers\");",
+													"pm.variables.set(\"groupName\", \" Travelers \");",
 													"",
 													"console.log(pm.variables.get(\"groupName\"));"
 												],
@@ -3293,7 +3306,80 @@
 												"group",
 												""
 											]
+										},
+										"description": "Name has spaces, but because they are trimmed and rest part of name was registered before, this name is considered as not unique"
+									},
+									"response": []
+								},
+								{
+									"name": "Create - 'name' with spaces at edges (unique)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "9a5c649d-f468-4b77-9108-22a9e258fd77",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 201 Created\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(201);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is successful\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(true);\r",
+													"    pm.expect(jsonData.fail).to.eql(false);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Response message is Group created\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group created');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Payload contains correct group Id\", function () {  \r",
+													"    pm.expect(jsonData.payload).is.not.undefined;\r",
+													"    pm.expect(jsonData.payload.length).is.eql(24);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "de67eb12-bbc3-4917-9692-716868d586e8",
+												"exec": [
+													"pm.variables.set(\"groupName\", \"  QA fans\" + new Date().getTime() + \"   \");",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
 										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										},
+										"description": "Spaces should be trimed and group should be created"
 									},
 									"response": []
 								},
@@ -3436,351 +3522,6 @@
 									"response": []
 								},
 								{
-									"name": "Create - 'name' starts with digit",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "da23313b-b572-487b-8995-a0f917a43c5e",
-												"exec": [
-													"const jsonData = pm.response.json();\r",
-													"\r",
-													"pm.test(\"Request code is 500\", function () {\r",
-													"    pm.expect(pm.response.code).to.eql(500);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Request is failed\", function () {\r",
-													"    pm.expect(jsonData.success).to.eql(false);\r",
-													"    pm.expect(jsonData.fail).to.eql(true);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Prime error message is correct\", function () {  \r",
-													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Specific error message is about invalid name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Incorrect name format');\r",
-													"});\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "631d81ff-a94e-48b3-a57c-106b73b9d397",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"name": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"1 Group name starts with digit\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
-										},
-										"url": {
-											"raw": "{{host}}/group/",
-											"host": [
-												"{{host}}"
-											],
-											"path": [
-												"group",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Create - 'name' starts with special symbols",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "da23313b-b572-487b-8995-a0f917a43c5e",
-												"exec": [
-													"const jsonData = pm.response.json();\r",
-													"\r",
-													"pm.test(\"Request code is 500\", function () {\r",
-													"    pm.expect(pm.response.code).to.eql(500);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Request is failed\", function () {\r",
-													"    pm.expect(jsonData.success).to.eql(false);\r",
-													"    pm.expect(jsonData.fail).to.eql(true);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Prime error message is correct\", function () {  \r",
-													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Specific error message is about invalid name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Incorrect name format');\r",
-													"});\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "4529e8f7-1a32-46fd-bb30-0e285b67d40e",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"name": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"* Group name starts with special symbol\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
-										},
-										"url": {
-											"raw": "{{host}}/group/",
-											"host": [
-												"{{host}}"
-											],
-											"path": [
-												"group",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Create - 'name' starts with non latin symbols",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "da23313b-b572-487b-8995-a0f917a43c5e",
-												"exec": [
-													"const jsonData = pm.response.json();\r",
-													"\r",
-													"pm.test(\"Request code is 500\", function () {\r",
-													"    pm.expect(pm.response.code).to.eql(500);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Request is failed\", function () {\r",
-													"    pm.expect(jsonData.success).to.eql(false);\r",
-													"    pm.expect(jsonData.fail).to.eql(true);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Prime error message is correct\", function () {  \r",
-													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Specific error message is about invalid name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Incorrect name format');\r",
-													"});\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "c54f3e02-4dcf-4d92-816a-e8ddaefa5110",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"name": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"Я Group name starts with cyrillic symbol\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
-										},
-										"url": {
-											"raw": "{{host}}/group/",
-											"host": [
-												"{{host}}"
-											],
-											"path": [
-												"group",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Create - 'name' starts with lower case",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "da23313b-b572-487b-8995-a0f917a43c5e",
-												"exec": [
-													"const jsonData = pm.response.json();\r",
-													"\r",
-													"pm.test(\"Request code is 500\", function () {\r",
-													"    pm.expect(pm.response.code).to.eql(500);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Request is failed\", function () {\r",
-													"    pm.expect(jsonData.success).to.eql(false);\r",
-													"    pm.expect(jsonData.fail).to.eql(true);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Prime error message is correct\", function () {  \r",
-													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Specific error message is about invalid name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Incorrect name format');\r",
-													"});\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "083d2dee-344a-4f9d-af12-86753ccda1df",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"name": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \"group name starts with lower case\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
-										},
-										"url": {
-											"raw": "{{host}}/group/",
-											"host": [
-												"{{host}}"
-											],
-											"path": [
-												"group",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "Create - 'name' starts with space",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "da23313b-b572-487b-8995-a0f917a43c5e",
-												"exec": [
-													"const jsonData = pm.response.json();\r",
-													"\r",
-													"pm.test(\"Request code is 500\", function () {\r",
-													"    pm.expect(pm.response.code).to.eql(500);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Request is failed\", function () {\r",
-													"    pm.expect(jsonData.success).to.eql(false);\r",
-													"    pm.expect(jsonData.fail).to.eql(true);\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Prime error message is correct\", function () {  \r",
-													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
-													"});\r",
-													"\r",
-													"pm.test(\"Specific error message is about invalid name\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: name: Incorrect name format');\r",
-													"});\r",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "512c6dae-7f63-450e-a68d-d8c12ac0a2ae",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"name": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n\t\"name\": \" Group name starts with space\",\r\n\t\"accessType\": \"members\",\r\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\r\n}"
-										},
-										"url": {
-											"raw": "{{host}}/group/",
-											"host": [
-												"{{host}}"
-											],
-											"path": [
-												"group",
-												""
-											]
-										}
-									},
-									"response": []
-								},
-								{
 									"name": "Create - 'name' contains non latin symbols",
 									"event": [
 										{
@@ -3816,7 +3557,7 @@
 											"script": {
 												"id": "f648db6f-93dc-4a1e-a845-ec207914a296",
 												"exec": [
-													"pm.variables.set(\"groupName\", \"S имя группы содержит кириллицу\" + new Date().getTime());",
+													"pm.variables.set(\"groupName\", \"Имя of group\" + new Date().getTime());",
 													"",
 													"console.log(pm.variables.get(\"groupName\"));"
 												],
@@ -3875,7 +3616,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing owner\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: No owner');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Owner id must be specified');\r",
 													"});\r",
 													""
 												],
@@ -4432,6 +4173,78 @@
 									"response": []
 								},
 								{
+									"name": "Create - 'owner' with letter after \"f\"",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "da23313b-b572-487b-8995-a0f917a43c5e",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group was not created.');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about invalid owner\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: owner: Cast to ObjectID failed for value \\\"' + pm.variables.get(\"groupOwner\")+ '\\\" at path \\\"owner\\\", members: Cast to Array failed for value \\\"[ \\'' + pm.variables.get(\"groupOwner\")+ '\\' ]\\\" at path \\\"members\\\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cd581047-361d-4c9a-8a14-1e1d2f7350fb",
+												"exec": [
+													"pm.variables.set(\"groupName\", \"QA3 fans\" + new Date().getTime());",
+													"pm.variables.set(\"groupOwner\", \"5cba6cee8ed8960004g68181\");",
+													"",
+													"console.log(\"groupName: \" + pm.variables.get(\"groupName\"));",
+													"console.log(\"groupOwner: \" + pm.variables.get(\"groupOwner\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\t\"name\": \"{{groupName}}\",\r\n\t\"owner\": \"{{groupOwner}}\",\r\n\t\"accessType\": \"members\"\r\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
 									"name": "Create - 'accessType' field is missing",
 									"event": [
 										{
@@ -4455,7 +4268,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing accessType\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: No access type');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: Access type must be specified');\r",
 													"});\r",
 													""
 												],
@@ -4526,7 +4339,7 @@
 													"});\r",
 													"\r",
 													"pm.test(\"Specific error message is about missing accessType\", function () {  \r",
-													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: No access type');\r",
+													"    pm.expect(jsonData.payload).to.equal('Group validation failed: accessType: Access type must be specified');\r",
 													"});\r",
 													""
 												],
@@ -6514,19 +6327,19 @@
 			"type": "string"
 		},
 		{
-			"id": "b06e9aa3-6f44-4f06-8a51-fe146e4941dd",
+			"id": "1924371e-4311-4d77-b38b-d5d91bddf474",
 			"key": "groupName",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "a32ec33a-e50b-481d-b8a5-c8189f152488",
+			"id": "361fdcf8-47c2-4d0e-a7fa-20f2370515e1",
 			"key": "groupOwner",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "6009c8f5-ff55-4ed3-8ef0-6946cd08f78e",
+			"id": "d23d85da-7d29-47cf-b3ca-2c8fa3e61439",
 			"key": "groupAccessType",
 			"value": "",
 			"type": "string"

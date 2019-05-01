@@ -11,7 +11,7 @@ const groupSchema = mongoose.Schema(
       unique: 'Group name must be unique',
       default: '',
       match: [
-        /^[A-Za-z0-9\s!@#$%^&()_+=\-`~\][{}|';:/.,?><]{2,255}$/,
+        /^[A-Za-z0-9\s!@#$%^&*()_+=\-`~\][{}|';:/.,?><]{2,255}$/,
         'Incorrect name format',
       ],
     },
