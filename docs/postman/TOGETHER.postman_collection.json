@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6df9265c-dac0-4e96-9e32-b72f9c971e97",
+		"_postman_id": "e0623b9d-7115-4989-8857-dc2209c06040",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -2317,41 +2317,497 @@
 					"name": "GROUP Positive",
 					"item": [
 						{
-							"name": "Create",
+							"name": "GROUP Positive POST Create",
+							"item": [
+								{
+									"name": "Create - 'accessType' = members",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "ac81f525-1cd2-4fcb-988c-a2017830707d",
+												"exec": [
+													"",
+													"pm.variables.set(\"groupName\", \"Travel to space - \" + new Date().getTime());",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create - 'accessType' = all",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "ac81f525-1cd2-4fcb-988c-a2017830707d",
+												"exec": [
+													"pm.variables.set(\"groupName\", \"Travel to space - \" + new Date().getTime());",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"all\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create -  'description' field is missing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "ac81f525-1cd2-4fcb-988c-a2017830707d",
+												"exec": [
+													"pm.variables.set(\"groupName\", \"Travel to space - \" + new Date().getTime());",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"all\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create -  'description' field is empty",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "ac81f525-1cd2-4fcb-988c-a2017830707d",
+												"exec": [
+													"pm.variables.set(\"groupName\", \"Travel to space - \" + new Date().getTime());",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"all\",\n\t\"description\": \"\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create - 'name' length is 2",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "3a29f09d-2396-4ec2-9ca6-7007cf2a10e9",
+												"exec": [
+													"let text=\"\";",
+													"let charset = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\";",
+													"",
+													"    for( var i=0; i < 2; i++ ) {",
+													"        text += charset.charAt(Math.floor(Math.random() * charset.length));",
+													"    }",
+													"",
+													"",
+													"pm.variables.set(\"groupName\", text);",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create - 'name' length is 255 contains letters (a-z, A-Z) and spaces",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "48688007-00b9-4056-b8f7-21dfd9fdf483",
+												"exec": [
+													"let text=\"\";",
+													"let charset = \"abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ\";",
+													"",
+													"    for( var i=0; i < 255; i++ ) {",
+													"        text += charset.charAt(Math.floor(Math.random() * charset.length));",
+													"    }",
+													"",
+													"",
+													"pm.variables.set(\"groupName\", text);",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create - 'name' length is 255 contains letters and sp. symb.",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d018babb-5e9c-4683-b46c-be278fa876e2",
+												"exec": [
+													"let text=\"\";",
+													"let charset = \"abcdefghijkl!@$%^&*()_ +=ABCDEFGHIJKL\";",
+													"",
+													"    for( var i=0; i < 255; i++ ) {",
+													"        text += charset.charAt(Math.floor(Math.random() * charset.length));",
+													"    }",
+													"",
+													"",
+													"pm.variables.set(\"groupName\", text);",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create - 'name' length is 255 contains numbers (0-9)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+												"exec": [
+													"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "31e39594-a5fe-43c8-9d89-39d1663f7ba4",
+												"exec": [
+													"let numb=\"\";",
+													"let charset = \"0123456789\";",
+													"",
+													"    for( var i=0; i < 255; i++ ) {",
+													"        numb += charset.charAt(Math.floor(Math.random() * charset.length));",
+													"    }",
+													"",
+													"",
+													"pm.variables.set(\"groupName\", parseInt(numb));",
+													"",
+													"console.log(pm.variables.get(\"groupName\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"{{groupName}}\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/group/",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Get By Id",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
-										"id": "afb101b0-2572-4982-8d01-afc5f3364ebe",
+										"id": "6c912046-f652-475a-80d5-756733e08df9",
 										"exec": [
-											"pm.test(\"Successful CREATE request\", function () {\r    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r});\r             \rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Message exists\", function () {\r    pm.expect(jsonData.message).to.not.be.undefined;\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group created')  \t\r});\r\rpm.test(\"Payload exists\", function () {\r    pm.expect(jsonData.payload).to.not.be.undefined;\r});\r"
+											"pm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});\r\rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group is found')  \t\r});\r\rpm.test(\"Payload is not an empty object\", function () {\r    for (let key in this.payload){\r        pm.expect(this.payload.key).to.not.be.empty;\r    }\r});"
 										],
 										"type": "text/javascript"
 									}
 								}
 							],
 							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
+								"method": "GET",
+								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"name\": \"Traveler098\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for the travel\",\n\t\"owner\": \"5cac0d59aa8e4ed7bf85de60\"\n}"
+									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/group/",
+									"raw": "{{host}}/group/5cbf6cee8ef8960004668186",
 									"host": [
 										"{{host}}"
 									],
 									"path": [
 										"group",
-										""
+										"5cbf6cee8ef8960004668186"
 									]
 								}
 							},
@@ -2426,40 +2882,6 @@
 									"path": [
 										"group",
 										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get By Id",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "6c912046-f652-475a-80d5-756733e08df9",
-										"exec": [
-											"pm.test(\"Status code is 200\", function () {\r    pm.response.to.have.status(200);\r});\r\rconst jsonData = pm.response.json();\rpm.test(\"Success is true\", function () {\r    pm.expect(jsonData.success).to.eql(true);\r    pm.expect(jsonData.fail).to.eql(false);\r});\r\rpm.test(\"Correct response message\", function () {  \r    pm.expect(jsonData.message).to.equal('Group is found')  \t\r});\r\rpm.test(\"Payload is not an empty object\", function () {\r    for (let key in this.payload){\r        pm.expect(this.payload.key).to.not.be.empty;\r    }\r});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{host}}/group/5cbf6cee8ef8960004668186",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"group",
-										"5cbf6cee8ef8960004668186"
 									]
 								}
 							},
