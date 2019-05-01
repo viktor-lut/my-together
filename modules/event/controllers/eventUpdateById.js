@@ -3,8 +3,9 @@ const Event = require('../eventModel');
 
 const eventUpdateById = (req, res) => {
   const {eventId} = req.params;
+  const options = {runValidators: true, context: 'query'};
 
-  Event.updateOne({_id: eventId}, {$set: req.body})
+  Event.updateOne({_id: eventId}, {$set: req.body}, options)
     .exec()
     .then(doc => {
       if (doc.n) {
