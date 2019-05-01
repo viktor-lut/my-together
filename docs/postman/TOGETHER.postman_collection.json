@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d8b0c18d-2584-458f-bbad-8262e4782013",
+		"_postman_id": "10dbac0f-6d09-4051-b5d7-d819fa7f2b31",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1047,6 +1047,1279 @@
 										"body": {
 											"mode": "raw",
 											"raw": "{\n   \"email\": \"{{userEmail}}\",\n   \"password\": \"abc123\",\n   \"phone\": \"+17075901867\",\n   \"name\": \"Петя Иванов\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' field is empty",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "88d651ac-e68a-4743-95d5-e0c0c1d9c928",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' field have array of strings",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "88d651ac-e68a-4743-95d5-e0c0c1d9c928",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": [\"+12345678901\", \"+12345678902\", \"+12345678903\"],\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' field is not string (is Number)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "884ee86e-fb52-43c9-bbc4-5950e4d9d11b",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": 11234567890,\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' field is not string (is Bolean)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "884ee86e-fb52-43c9-bbc4-5950e4d9d11b",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": true,\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' field is not string (is Null)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "884ee86e-fb52-43c9-bbc4-5950e4d9d11b",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": null,\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' field is missing",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "8c7aa14b-61d1-4faf-ba32-f976fae3470b",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' field is not unique",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 409\", function () {",
+													"        pm.response.to.have.status(409);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User with this phone already exists')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "09f8b7a7-30c5-41ad-bd2c-1b6a4584f219",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"+12345678900\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' length 13(more than max lim)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "69ee0a86-e38f-4bb6-84a3-5138e3f8eb24",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog132\",\n\t\"phone\": \"+012345678911\",\n\t\"name\": \"Super Woman\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' length 9 (less than min lim)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "5615bb57-d735-4667-88ad-ffcf0d67ac0f",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"+12345678\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' length 1 (only '+')",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "c45d6b6c-2713-475b-ad6c-d0e45757c83d",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"+\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' length 1 (one random spesial symbol)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "5ed0c907-8deb-4904-bfc6-0d8f594978ec",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"_\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' length  (one digit)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "26f62b90-a3b7-4d54-9324-1d1f362697ea",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"3\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' starts with digits",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "45a6d8c7-a0dd-45b1-bd9f-29da5aeaf691",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"312345678901\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' with any one letter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "586fda9a-4833-47de-b5c4-8f10d69bd631",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"+1234a567890\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' only 12 random letters",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d7620c79-00f6-450e-b744-1f6c52d55b96",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"qwertyuiopas\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' starts with space",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "633f178f-cfdd-4515-9d32-4bfc97c53cf4",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \" +1234567890\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' space in end string",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "5d1b2d7b-1004-4315-93fe-aff160018be3",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"+1234547890 \",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' space inside the string",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "239ae118-8f0f-4102-9cea-8c8f9142f9b0",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"+12345 47890\",\n\t\"name\": \"Super Man\"\n}"
+										},
+										"url": {
+											"raw": "{{host}}/user/register",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Register-'phone' spesial symbol inside the string(random)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "c8fd2ecf-89c9-4c6a-bc17-878704a7658f",
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"        pm.response.to.have.status(404);",
+													"});",
+													"const jsonData = pm.response.json(); ",
+													"pm.test(\"Success is false\", function () {",
+													"    pm.expect(jsonData.success).to.eql(false);",
+													"    pm.expect(jsonData.fail).to.eql(true);",
+													"});",
+													"",
+													"pm.test(\"Correct response message\", function () {                   ",
+													"    pm.expect(jsonData.message).to.equal('User was not created')  \t",
+													"});",
+													"",
+													"pm.test(\"Response time is less than 5000ms\", function () {",
+													"    pm.expect(pm.response.responseTime).to.be.below(5000);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "d24ef6c2-9f73-4e69-8646-96c9a8c3b508",
+												"exec": [
+													"pm.variables.set(\"userEmail\", new Date().getTime()+\"@gmail.com\");",
+													"console.log(pm.variables.get(\"userEmail\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"email\":\"{{userEmail}}\" ,\n\t\"password\": \"katdog12\",\n\t\"phone\": \"+12345+47890\",\n\t\"name\": \"Super Man\"\n}"
 										},
 										"url": {
 											"raw": "{{host}}/user/register",
