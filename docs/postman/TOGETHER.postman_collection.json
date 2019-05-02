@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "10dbac0f-6d09-4051-b5d7-d819fa7f2b31",
+		"_postman_id": "d343c85c-2524-4bea-bf59-2ce360ebc933",
 		"name": "TOGETHER",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -5903,7 +5903,416 @@
 						},
 						{
 							"name": "GROUP Negative PATCH Update By Id",
-							"item": [],
+							"item": [
+								{
+									"name": "Group-update-empty-Id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ea0e2def-7c1b-44cc-b0a1-a3677a84ce96",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 404\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(404);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('API not found');  \t\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cf614561-5151-4c10-9f64-6d0c5d56e605",
+												"exec": [
+													"pm.variables.set(\"groupId\", \"\");"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"Homebodies\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for house rest\",\n\t\"owner\": \"5caaa23fc3d26e00049736e1\"\n}\n"
+										},
+										"url": {
+											"raw": "{{host}}/group/{{groupId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												"{{groupId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Group-update-Id-length-23",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ea0e2def-7c1b-44cc-b0a1-a3677a84ce96",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"groupId\")+'\" at path \"_id\" for model \"Group\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cf614561-5151-4c10-9f64-6d0c5d56e605",
+												"exec": [
+													"pm.variables.set(\"groupId\", \"5cbf6cee8ef896000466818\");"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"Homebodies\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for house rest\",\n\t\"owner\": \"5caaa23fc3d26e00049736e1\"\n}\n"
+										},
+										"url": {
+											"raw": "{{host}}/group/{{groupId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												"{{groupId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Group-update-Id-length-25",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ea0e2def-7c1b-44cc-b0a1-a3677a84ce96",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"groupId\")+'\" at path \"_id\" for model \"Group\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cf614561-5151-4c10-9f64-6d0c5d56e605",
+												"exec": [
+													"pm.variables.set(\"groupId\", \"5cbf6cee8ef89600046681899\");"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"Homebodies\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for house rest\",\n\t\"owner\": \"5caaa23fc3d26e00049736e1\"\n}\n"
+										},
+										"url": {
+											"raw": "{{host}}/group/{{groupId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												"{{groupId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Group-update-Id-special-symbol",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ea0e2def-7c1b-44cc-b0a1-a3677a84ce96",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"groupId\")+'\" at path \"_id\" for model \"Group\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cf614561-5151-4c10-9f64-6d0c5d56e605",
+												"exec": [
+													"pm.variables.set(\"groupId\", \"5cbf6cee8e!8960004668188\");",
+													"console.log(pm.variables.get(\"groupId\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"Homebodies\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for house rest\",\n\t\"owner\": \"5caaa23fc3d26e00049736e1\"\n}\n"
+										},
+										"url": {
+											"raw": "{{host}}/group/{{groupId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												"{{groupId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Group-update-Id-space-begin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ea0e2def-7c1b-44cc-b0a1-a3677a84ce96",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"groupId\")+'\" at path \"_id\" for model \"Group\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cf614561-5151-4c10-9f64-6d0c5d56e605",
+												"exec": [
+													"pm.variables.set(\"groupId\", \" 5cbf6cee8e8960004668188\");",
+													"console.log(pm.variables.get(\"groupId\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"Homebodies\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for house rest\",\n\t\"owner\": \"5caaa23fc3d26e00049736e1\"\n}\n"
+										},
+										"url": {
+											"raw": "{{host}}/group/{{groupId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												"{{groupId}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Group-update-Id-space-center",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "ea0e2def-7c1b-44cc-b0a1-a3677a84ce96",
+												"exec": [
+													"const jsonData = pm.response.json();\r",
+													"\r",
+													"pm.test(\"Request code is 500\", function () {\r",
+													"    pm.expect(pm.response.code).to.eql(500);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Request is failed\", function () {\r",
+													"    pm.expect(jsonData.success).to.eql(false);\r",
+													"    pm.expect(jsonData.fail).to.eql(true);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Prime error message is correct\", function () {  \r",
+													"    pm.expect(jsonData.message).to.equal('Group update error');  \t\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Specific error message is about missing required fields\", function () {  \r",
+													"    pm.expect(jsonData.payload).to.equal('Cast to ObjectId failed for value \"'+ pm.variables.get(\"groupId\")+'\" at path \"_id\" for model \"Group\"');\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "cf614561-5151-4c10-9f64-6d0c5d56e605",
+												"exec": [
+													"pm.variables.set(\"groupId\", \"5cbf6cee8e 8960004668188\");",
+													"console.log(pm.variables.get(\"groupId\"));"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PATCH",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"name\": \"Homebodies\",\n\t\"accessType\": \"members\",\n\t\"description\": \"Group for house rest\",\n\t\"owner\": \"5caaa23fc3d26e00049736e1\"\n}\n"
+										},
+										"url": {
+											"raw": "{{host}}/group/{{groupId}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"group",
+												"{{groupId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
 							"_postman_isSubFolder": true
 						}
 					],
@@ -7582,74 +7991,80 @@
 	],
 	"variable": [
 		{
-			"id": "8f111255-b578-4c36-a3bd-4c0932f72f19",
+			"id": "415744ae-097b-4656-b6be-6f0ea272bd49",
 			"key": "userEmail",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "3fe257f2-a3b7-46de-9262-c330120e3b10",
+			"id": "c37ee877-ecd1-45c0-a47e-66794fc621e3",
 			"key": "userID",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "ac8c9860-9f9b-44d6-8c6c-88308844be36",
+			"id": "90ff5539-4d73-4fd3-a37b-2c4c2900aeb3",
 			"key": "userId",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "1924371e-4311-4d77-b38b-d5d91bddf474",
+			"id": "01c32618-d538-4225-a467-9b4095cd14af",
 			"key": "groupName",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "361fdcf8-47c2-4d0e-a7fa-20f2370515e1",
+			"id": "025c38d5-8afb-4f52-9729-faaaecaa4900",
 			"key": "groupOwner",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "d23d85da-7d29-47cf-b3ca-2c8fa3e61439",
+			"id": "8e296b7d-c073-482d-af3a-4dcda7cf7e59",
 			"key": "groupAccessType",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "1ff7f3c6-4e90-4737-8afa-06d776560081",
+			"id": "618005bc-5e60-4602-9404-b45d659b27d1",
 			"key": "eventId",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "e7d0cedd-552b-4b36-b2dd-029ddc6a46f5",
+			"id": "98a67164-08a5-4516-ba75-c221b01ce3a7",
 			"key": "eventName",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "24a76786-25c6-4e12-aff9-a3dbe9274710",
+			"id": "fc5b0aed-3e8c-43e7-ad6c-1196d47bac4b",
 			"key": "eventDescription",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "e57b89c9-df55-4f14-8cff-bb1c719fead2",
+			"id": "5dd872e5-3e68-4b25-9960-8dc356f3579a",
 			"key": "userPassword",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "540a5300-5992-4315-9ce2-6d2b8fa86f8d",
+			"id": "68adedbd-0b54-4bb6-a61d-656bd2a95beb",
 			"key": "userPhone",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "6bd842c2-9554-4c71-a057-58486b8b9a8b",
+			"id": "3a66aa1b-e9de-4046-9503-192309fe416e",
 			"key": "userName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "2b63e08d-a362-4201-9723-50435b894d0d",
+			"key": "groupId",
 			"value": "",
 			"type": "string"
 		}
