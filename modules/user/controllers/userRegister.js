@@ -1,23 +1,16 @@
 const message = require('../../core/message');
-const checkIfUserExists = require('./isUserExists');
 const createUser = require('./userCreate');
 
 const userRegister = async (req, res) => {
   const {email: rawEmail = '', password, phone, name} = req.body;
   const email = rawEmail.trim().toLowerCase();
 
-  const isUserExists = await checkIfUserExists(email);
-  if (isUserExists)
-    return res
-      .status(409)
-      .json(message.fail('User with this email already exists', email));
-
   if (!isStrongPassword(password))
     return res
       .status(409)
       .json(
         message.fail(
-          'Password must contain at least one letter, one digit and be 6-124 characters in length.',
+          'Password must contain at least one letter, one digit and be 6-124 characters in length',
         ),
       );
 
@@ -35,7 +28,7 @@ const userRegister = async (req, res) => {
   } else {
     return res
       .status(404)
-      .json(message.fail('User was not created', createdUser.message));
+      .json(message.fail('User was not created', createdUser.payload));
   }
 };
 

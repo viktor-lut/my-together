@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = mongoose.Schema(
   {
@@ -6,7 +7,7 @@ const userSchema = mongoose.Schema(
     email: {
       type: String,
       required: [true, 'No email'],
-      unique: true,
+      unique: 'User with this email already exists',
       match: [
         /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
         'Incorrect email format',
@@ -28,7 +29,6 @@ const userSchema = mongoose.Schema(
     phone: {
       type: String,
       required: [true, 'No phone'],
-      unique: true,
       match: [/^\+[0-9]{11,12}$/, 'Incorrect phone format'],
     },
     phoneConfirmation: {
@@ -86,4 +86,5 @@ const userSchema = mongoose.Schema(
   {timestamps: {}},
 );
 
+userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('User', userSchema);
